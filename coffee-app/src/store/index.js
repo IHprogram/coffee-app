@@ -18,7 +18,7 @@ export default new Vuex.Store({
   },
   actions: {
     setLoginUser({ commit }, user){
-      commit('setLoginUser', user)
+      commit('setLoginUser',user)
     },
     login(){
       const google_auth_provider = new firebase.auth.GoogleAuthProvider()
@@ -31,5 +31,6 @@ export default new Vuex.Store({
       commit("deleteLoginUser");
     },
   },
-  modules: {},
+  modules: {
+  },
 });
