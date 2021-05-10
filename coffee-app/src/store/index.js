@@ -15,9 +15,6 @@ export default new Vuex.Store({
     deleteLoginUser(state) {
       state.login_user = null;
     },
-    deleteLoginUser(state){
-      state.login_user = null
-    }
   },
   actions: {
     setLoginUser({ commit }, user){

@@ -1,8 +1,8 @@
 <template>
   <div>
     <v-nav @click="login">ログイン画面</v-nav>
-    <!-- <button @click="logout">ログアウト</button> -->
-
+      <div>メールアドレス：<input type="text"></div>
+      <div>パスワード：<input type="password"></div>
   </div>
 </template>
 
