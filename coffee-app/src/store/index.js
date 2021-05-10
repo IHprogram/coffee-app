@@ -28,6 +28,9 @@ export default new Vuex.Store({
     deleteLoginUser({ commit }) {
       commit("deleteLoginUser");
     },
+    addOrder({ commit }, item) {
+      commit("addOrder", item);
+    },
   },
   modules: {},
 });
