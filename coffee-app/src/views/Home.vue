@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <header>
-      <button @click="login">ログイン</button>
+      <button class="text-align:right" @click="login">ログイン</button>
     </header>
     <Items></Items>
     <Login />
@@ -10,7 +10,7 @@
 
 <script>
 import Items from "../components/Items.vue"
-import Login from "../components/Login.vue"
+// import Login from "../components/Login.vue"
 
 export default {
   name: 'Home',
@@ -19,7 +19,7 @@ export default {
     Login
   },
   methods: {
-    ...mapActions("login")
+    // ...mapActions("login")
   },
 }
 

@@ -19,9 +19,9 @@ export default ({
     };
   },
   methods:{
-    login: function(){
-      this.$router.push('')
-    }
+    // login: function(){
+    //   this.$router.push('')
+    // 
   }
 })
 </script>
