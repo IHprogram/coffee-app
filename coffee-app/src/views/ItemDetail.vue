@@ -1,27 +1,62 @@
 <template>
   <div>
     <h2>商品詳細</h2>
-    <img class="card-img-top" :src="item.imagePath" style="width: 200px; height: 200px;">
-    <p>商品のID: {{item.id}}</p>
-    <p>商品名: {{item.name}}</p>
-    <p>説明: {{item.description}}</p>
-    <p>価格: {{item.price}}</p>
+    <img
+      class="card-img-top"
+      :src="item.imagePath"
+      style="width: 200px; height: 200px"
+    />
+    <p>商品のID: {{ item.id }}</p>
+    <p>商品名: {{ item.name }}</p>
+    <p>説明: {{ item.description }}</p>
+    <p>価格: {{ item.price }}円（税抜き）</p>
+
+    <select v-model="selected" @change="numberChange">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+      <option>6</option>
+      <option>7</option>
+      <option>8</option>
+      <option>9</option>
+      <option>10</option>
+      <option>11</option>
+      <option>12</option>
+    </select>
+
+    <p>合計:{{ total_price }}円（税抜き）</p>
+
+    <button type="button" @click="myClick">カートに入れる</button>
   </div>
 </template>
 
 <script>
-export default{
-  data(){
+export default {
+  data() {
     return {
-      item: {}
-    }
+      item: {},
+      selected: 1,
+      total_price: 0,
+    };
+  },
+  methods: {
+    myClick() {
+      console.log("myClickです！");
+    },
+    numberChange() {
+      this.total_price = this.item.price * this.selected;
+    },
   },
   created() {
     const item = this.$store.getters.getItemById(this.$route.params.item_id);
 
-    if(item){
+    if (item) {
       this.item = item;
     }
+
+    this.total_price = this.item.price;
   },
-}
+};
 </script>
