@@ -2,28 +2,30 @@
   <div class="home">
     <header>
       <button @click="login">ログイン</button>
+      <button @click="cart">カート</button>
     </header>
-    <Login />
-
-  <div>
-    <Search></Search>
-    <Items></Items>
-  </div>
+    <div>
+      <Search></Search>
+      <Items></Items>
+    </div>
   </div>
 </template>
 
 <script>
 import Items from "../components/Items.vue"
 import Search from '../components/Search.vue'
+
+import { mapActions } from "vuex"
+
 export default {
   name: 'Home',
-  methods: {
-
-  },
   components: {
     Items,
     Search
-  }
+  },
+  methods: {
+    ...mapActions(["login"])
+  },
 }
 
 </script>

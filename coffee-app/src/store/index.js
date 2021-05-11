@@ -6,6 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    order: [],
     login_user: null,
     items: [
       {
@@ -146,20 +147,25 @@ export default new Vuex.Store({
     
   },
   actions: {
-    setLoginUser({ commit }, user){
-      commit('setLoginUser',user)
+    setLoginUser({ commit }, user) {
+      commit("setLoginUser", user);
     },
-    login(){
-      const google_auth_provider = new firebase.auth.GoogleAuthProvider()
-      firebase.auth().signInWithRedirect(google_auth_provider)
-  },
+    login() {
+      const google_auth_provider = new firebase.auth.GoogleAuthProvider();
+      firebase.auth().signInWithRedirect(google_auth_provider);
+    },
     logout() {
       firebase.auth().signOut();
     },
     deleteLoginUser({ commit }) {
       commit("deleteLoginUser");
     },
+    addOrder({ commit }, item) {
+      commit("addOrder", item);
+    },
+    
   },
-  modules: {
+  getters: {
+    getItemById: (state) => (id) => state.items.find((item) => item.id === id),
   },
 });
