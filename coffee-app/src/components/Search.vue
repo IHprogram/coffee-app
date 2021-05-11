@@ -21,9 +21,9 @@
                         </th>
                         </tr>
 						<tr v-else-if="searchitems.length>0">
-							<th v-for="(searchitem,key) in searchitems" :key=key>
+							<th v-for="searchitem in searchitems" :key=searchitem.id>
 								<td>{{searchitem.name}}</td>
-                                <td>{{searchitem.description}}</td>
+                                <!-- <td>{{searchitem.description}}</td> -->
                                 <td>{{searchitem.price}}円</td>
                                 <td><img :src="searchitem.imagePath"></td>
 							</th>
@@ -123,18 +123,18 @@ keyword:""
  },
     methods:{
         search(){
-            this.searchitems.splice(0)
+     this.searchitems=[];
 
         if(this.keyword===""){
         return //処理が終了
         }
 
-        for(let i=0;i<this.items.length;i++){
-        let string=this.items[i].name
+        for(let i=0;i<this.$store.state.items.length;i++){
+        let string=this.$store.state.items[i].name
         let substring=this.keyword
 
         if(string.indexOf(substring)>-1){
-        this.searchitems.push(this.items[i]);
+        this.searchitems.push(this.$store.state.items[i]);
         console.log(this.searchitems)
         }
         }

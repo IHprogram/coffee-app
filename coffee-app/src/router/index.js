@@ -1,10 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Cart from '../views/Cart.vue'
-import Items from '../views/Items.vue'
 
 Vue.use(VueRouter)
+import 'bootstrap/dist/css/bootstrap.css' // add
+import 'bootstrap-vue/dist/bootstrap-vue.css' // add
+
+import 'bootstrap/dist/css/bootstrap.css' 
+import 'bootstrap-vue/dist/bootstrap-vue.css' 
 
 const routes = [
   {
@@ -20,18 +23,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
-  {
-    path: '/cart',
-    name: 'Cart',
-    component: Cart
-  },
-  {
-    path: '/items',
-    name: 'Items',
-    component: Items
-  },
 ]
-
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
