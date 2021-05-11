@@ -10,15 +10,17 @@
 
 <script>
 import Items from "../components/Items.vue"
+import Login from "../components/Login.vue"
 
 export default {
   name: 'Home',
-  methods: {
-
-  },
   components: {
-    Items
-  }
+    Items,
+    Login
+  },
+  methods: {
+    ...mapActions("login")
+  },
 }
 
 </script>
