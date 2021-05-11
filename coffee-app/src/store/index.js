@@ -6,9 +6,46 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    order: [],
+    orders: [ 
+      {
+        id:8,
+        name: "キャラメルマキアート",
+        description: "バニラシロップとスチームミルクのコンビネーションになめらかなフォームミルクをたっぷりのせ、その上からエスプレッソを注いでアクセントを付けました。仕上げにオリジナルキャラメルソースをトッピングしています。",
+        price: 390,
+        imagePath: require("../assets/img/8.jpg")
+      },
+      {
+      id:1,
+      name: "Gorgeous4サンド",
+      description: "人気の定番具材「ハム」と「チキン」をセットにした食べごたえ抜群のサンドイッチです。",
+      price: 480,
+      imagePath: "../assets/img/1.jpg"
+    },
+    {
+      id:2,
+      name: "エスプレーノ",
+      description: "ひと口目に感じるエスプレッソは「リストレット」という方法で抽出した力強い香りと優しい苦味を、ふた口目は全体を混ぜて、こだわりのクリームから来るアフォガートのような味わいをお楽しみください。リフレッシュしたい時や、ほっとひと息つきたい時にも、何度でも飲みたくなるフラペチーノ®です.",
+      price: 530,
+      imagePath: require("../assets/img/2.jpg")
+    },
+    {
+      id:2,
+      name: "ラペチーノ",
+      description: "ひと口目に感じるエスプレッソは「リストレット」という方法で抽出した力強い香りと優しい苦味を、ふた口目は全体を混ぜて、こだわりのクリームから来るアフォガートのような味わいをお楽しみください。リフレッシュしたい時や、ほっとひと息つきたい時にも、何度でも飲みたくなるフラペチーノ®です.",
+      price: 530,
+      imagePath: require("../assets/img/2.jpg")
+    },
+    {
+      id:2,
+      name: "チーノ",
+      description: "ひと口目に感じるエスプレッソは「リストレット」という方法で抽出した力強い香りと優しい苦味を、ふた口目は全体を混ぜて、こだわりのクリームから来るアフォガートのような味わいをお楽しみください。リフレッシュしたい時や、ほっとひと息つきたい時にも、何度でも飲みたくなるフラペチーノ®です.",
+      price: 530,
+      imagePath: require("../assets/img/2.jpg")
+    },
+  ],
     login_user: null,
     items: [
+      
       {
         id:1,
         name: "Gorgeous4サンド",
@@ -163,6 +200,7 @@ export default new Vuex.Store({
     addOrder({ commit }, item) {
       commit("addOrder", item);
     },
+
   },
   getters: {
     userName: state => state.login_user ? state.login_user.displayName : '',

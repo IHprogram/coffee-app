@@ -4,6 +4,7 @@
       <button @click="login" v-if="!$store.state.login_user">ログイン</button>
       <div v-if="$store.state.login_user">
         <button @click="logout">ログアウト</button>
+        <router-link :to="{name:'Cart'}">カート</router-link>
       </div>
       <p>ログイン中のユーザー : {{ userName }}</p>
       
@@ -18,6 +19,7 @@
 <script>
 import Items from "../components/Items.vue"
 import Search from '../components/Search.vue'
+
 import { mapActions } from "vuex"
 import { mapGetters } from "vuex"
 
