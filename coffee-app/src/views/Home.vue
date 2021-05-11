@@ -3,10 +3,8 @@
     <header>
       <button @click="login">ログイン</button>
     </header>
-    <Login />
-
-  <div>
     <Items></Items>
+    <Login />
   </div>
 </template>
 
