@@ -5,6 +5,9 @@ import Login from '../views/Login.vue'
 
 Vue.use(VueRouter)
 
+import 'bootstrap/dist/css/bootstrap.css' 
+import 'bootstrap-vue/dist/bootstrap-vue.css' 
+
 const routes = [
   {
     path: '/',
