@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <header>
-      <button @click="login">ログイン</button>
+    <header >
+      <button class="text-align:right" @click="login">ログイン</button>
     </header>
     <div>
       <Search></Search>
