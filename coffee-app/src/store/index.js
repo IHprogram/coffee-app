@@ -165,6 +165,7 @@ export default new Vuex.Store({
     },
   },
   getters: {
+    userName: state => state.login_user ? state.login_user.displayName : '',
     getItemById: (state) => (id) => state.items.find((item) => item.id === id),
   },
 });
