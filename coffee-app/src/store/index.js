@@ -6,7 +6,13 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    order: [],
+    orders: [ {
+      id:1,
+      name: "Gorgeous4サンド",
+      description: "人気の定番具材「ハム」と「チキン」をセットにした食べごたえ抜群のサンドイッチです。",
+      price: 480,
+      imagePath: "../assets/img/1.jpg"
+    }],
     login_user: null,
     items: [
       {
@@ -163,9 +169,10 @@ export default new Vuex.Store({
     addOrder({ commit }, item) {
       commit("addOrder", item);
     },
-    
+
   },
   getters: {
+    userName: state => state.login_user ? state.login_user.displayName : '',
     getItemById: (state) => (id) => state.items.find((item) => item.id === id),
   },
 });

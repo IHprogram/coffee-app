@@ -16,26 +16,12 @@
 							</th>
 							<th>
 								<div class="text-center">
-									サイズ、価格(税抜)、数量
-								</div>
-							</th>
-							<th>
-								<div class="text-center">
 									価格(税抜)
 								</div>
 							</th>
-							<th>
-								<div class="text-center">
-									小計
-								</div>
-							</th>
-							<th>
-								ボ
-							</th>
 						</tr>
-						<tr v-for="(order,key) in orders" :key=key>
+						<tr v-for="(order,index) in orders" :key=index>
 							<td>{{order.name}}</td>
-							<td>{{order.description}}</td>
 							<td>{{order.price}}</td>
 							<td></td>
 							<td><button>削除</button></td>
@@ -73,6 +59,7 @@
 
 <script>
 export default{
+	name:"Cart",
     data(){
     return{
         items:[
@@ -184,48 +171,18 @@ orders:[
         price: 400,
         imagePath: '../assets/img/5.jpg'
       },
-      {
-        id:6,
-        name: 'カフェラテ',
-        description: '最も人気のあるエスプレッソ ビバレッジ。リッチなエスプレッソにスチームミルクを注ぎ、フォームミルクを丁寧にトッピングしました。ミルキーな味わいで気持ちを温かくしてくれます。',
-        price: 340,
-        imagePath: '../assets/img/6.jpg'
-      },
-      {
-        id:7,
-        name: 'カプチーノ',
-        description: 'リッチなエスプレッソに一気にミルクを注ぐことで、一口飲んだときからコーヒー感が感じられるビバレッジです。ベルベットのようにきめ細かいフォームミルクをお楽しみください。',
-        price: 340,
-        imagePath: '../assets/img/7.jpg'
-      },
-      {
-        id:8,
-        name: 'キャラメルマキアート',
-        description: 'バニラシロップとスチームミルクのコンビネーションになめらかなフォームミルクをたっぷりのせ、その上からエスプレッソを注いでアクセントを付けました。仕上げにオリジナルキャラメルソースをトッピングしています。',
-        price: 390,
-        imagePath: '../assets/img/8.jpg'
-      },
-      {
-        id:9,
-        name: 'キャラメルフラペチーノ',
-        description: 'コーヒー、ミルク、キャラメルシロップを氷とブレンドした、多くのお客様に愛されているフローズン ビバレッジです。トッピングしたホイップクリームとキャラメルソースと混ぜながら、豊かでほんのり香ばしいキャラメルの風味をお楽しみください。',
-        price: 490,
-        imagePath: '../assets/img/9.jpg'
-      },
-      {
-        id:10,
-        name: 'バニラ クリーム フラペチーノ',
-        description: 'ミルクとバニラシロップを氷とブレンドし、ホイップクリームをトッピングした、クリーミーな味わいのフローズン ビバレッジ。真っ白な見た目も爽やかです。ミルクとバニラシロップというシンプルな組み合わせはいろいろなカスタマイズとも好相性。',
-        price: 490,
-        imagePath: '../assets/img/10.jpg'
-      },
 ],
     
     };
  },
     methods:{
-      
-            }
+      delete(){},
+            },
+	computed:{
+    order(){
+		return this.$store.state.orders
+	}
+	}
     
 };
 </script>
