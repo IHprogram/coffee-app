@@ -38,7 +38,7 @@
                 <td>{{order.description}}</td>
                 <td>{{order.price}}</td>
                 <td></td>
-                <td><button>削除</button></td>
+                <td><button @click="deleteOder">削除</button></td>
               </tr>
             
             </tbody>
@@ -224,7 +224,9 @@ orders:[
     };
  },
     methods:{
-      
+      deleteOrder(){
+        
+      }
             }
     
 };

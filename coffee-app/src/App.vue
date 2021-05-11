@@ -15,7 +15,7 @@ export default ({
   components: {
   },
   created(){
-    firebase.auth().onAuthStateChenged(user => {
+    firebase.auth().onAuthStateChanged(user => {
       if(user){
         this.setLoginUser(user)
       } else {
@@ -24,7 +24,7 @@ export default ({
     })
  },
   methods: {
-    ...mapActions(['setLoginUser','logout','deleteLoginUser'])
+    ...mapActions(['setLoginUser','deleteLoginUser'])
   }
 })
 </script>
