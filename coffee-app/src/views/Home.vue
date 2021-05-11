@@ -8,6 +8,7 @@
   <div>
     <Search></Search>
     <Items></Items>
+    </div>
   </div>
 </template>
 
