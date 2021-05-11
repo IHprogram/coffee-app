@@ -1,13 +1,14 @@
 <template>
   <div class="home">
+
     <header>
       <button @click="login">ログイン</button>
     </header>
     <Login />
-
   <div>
     <Search></Search>
     <Items></Items>
+
     </div>
   </div>
 </template>
