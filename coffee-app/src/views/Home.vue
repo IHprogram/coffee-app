@@ -1,21 +1,24 @@
 <template>
   <div class="home">
-    <!-- <ul>
-      <li v-for="item in $store.state.items" :key="item.id">
-        <router-link :to="{name: 'item_detail', params:{item_id: item.id}}">
-          <p>{{item.name}}</p>
-        </router-link>
-        <p>{{item.price}}</p>
-      </li>
-    </ul> -->
-  <div>
-    <Items></Items>
+
+    <header>
+      <button @click="login">ログイン</button>
+    </header>
+    <Login />
+    <div>
+      <Items></Items>
+    </div>
   </div>
 </template>
 
 <script>
 import Items from "../components/Items.vue"
-export default{
+
+export default {
+  name: 'Home',
+  methods: {
+
+  },
   components: {
     Items
   }

@@ -1,18 +1,27 @@
 <template>
   <div>
-    <v-nav @click="login">ログイン画面</v-nav>
-      <div>メールアドレス：<input type="text"></div>
-      <div>パスワード：<input type="password"></div>
+    <h3>ログイン画面</h3>
+      <label for="email">メールアドレス：</label>
+      <input id="email" type="text">
+      <label for="password">パスワード：</label>
+      <input type="password">
+      <button @click= "login">ログイン</button>
   </div>
 </template>
 
 <script>
-import firebase from 'firebase'
-import { mapActions } from 'vuex'
-
 export default ({
-  methods:{
-    ...mapActions(["login"])
+  name: "Login",
+  data(){
+    return {
+      email: '',
+      password: ''
+    };
   },
+  methods:{
+    login: function(){
+      this.$router.push('/')
+    }
+  }
 })
 </script>
