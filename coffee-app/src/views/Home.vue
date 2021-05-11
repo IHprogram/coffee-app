@@ -4,10 +4,9 @@
       <button @click="login" v-if="!$store.state.login_user">ログイン</button>
       <div v-if="$store.state.login_user">
         <button @click="logout">ログアウト</button>
-        <router-link :to="{name:'Cart'}">カート</router-link>
+        <router-link :to="{name:'Cart'}">カート [{{ this.$store.state.orders.length }}個]</router-link>
       </div>
       <p>ログイン中のユーザー : {{ userName }}</p>
-      
     </header>
   <div>
     <Search></Search>
@@ -15,7 +14,7 @@
     </div>
   </div>
 </template>
-
+      
 <script>
 import Items from "../components/Items.vue"
 import Search from '../components/Search.vue'
