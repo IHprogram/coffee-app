@@ -2,9 +2,9 @@
   <div>
     <h3>ログイン画面</h3>
       <label for="email">メールアドレス：</label>
-      <input id="email" type="text">
+      <input id="email" type="text" value="email">
       <label for="password">パスワード：</label>
-      <input type="password">
+      <input type="password" value="password">
       <button @click= "login">ログイン</button>
   </div>
 </template>
