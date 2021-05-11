@@ -1,7 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import Login from "../views/Login.vue";
 import ItemDetail from "../views/ItemDetail.vue";
 
 Vue.use(VueRouter);
@@ -19,11 +18,6 @@ const routes = [
     path: "/:item_id?/item_detail",
     name: "item_detail",
     component: ItemDetail,
-  },
-  {
-    path: "/login",
-    name: "Login",
-    component: Login,
   },
 ];
 
