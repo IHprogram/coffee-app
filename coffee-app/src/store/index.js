@@ -145,10 +145,13 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    login() {
-      const google_auth_provider = new firebase.auth.GoogleAuthProvider();
-      firebase.auth().signInWithRedirect(google_auth_provider);
+    setLoginUser({ commit }, user){
+      commit('setLoginUser',user)
     },
+    login(){
+      const google_auth_provider = new firebase.auth.GoogleAuthProvider()
+      firebase.auth().signInWithRedirect(google_auth_provider)
+  },
     logout() {
       firebase.auth().signOut();
     },
@@ -156,9 +159,6 @@ export default new Vuex.Store({
       commit("deleteLoginUser");
     },
   },
-  getters: {
-    getItemById: (state) => (id) =>
-    state.items.find((item) => item.id === id)
+  modules: {
   },
-  modules: {},
 });
