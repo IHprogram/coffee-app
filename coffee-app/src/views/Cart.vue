@@ -148,7 +148,7 @@ export default{
       },
      
         ],
-orders:[//商品のstatusが【カートの中】の場合、その商品の情報がここの配列にpushされる
+orders:[
             {
         id:1,
         name: "Gorgeous4サンド",
