@@ -1,14 +1,10 @@
 <template>
   <div id="app">
     <div id="nav">
-      <header>
-
-      </header>
-    </div>
     <router-view/>
+    </div>
   </div>
 </template>
-
 <script>
 // import firebase from 'firebase'
 // import mapActions from 'vuex'
@@ -30,4 +26,3 @@ export default ({
   }
 })
 </script>
-
