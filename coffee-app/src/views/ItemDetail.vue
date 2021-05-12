@@ -41,31 +41,23 @@ export default {
       item: {},
       selected: 1,
       total_price: 0,
-      order: {},
     };
   },
   methods: {
     myClick() {
-      console.log("myClickです！");
-      this.order = {};
-      console.log("空にした後のthis.orderの中身");
-      console.log(this.order);
-
-      this.order.itemId = this.item.id;
-      this.order.name = this.item.name;
-      this.order.imagePath = this.item.imagePath;
-      this.order.price = this.item.price;
-      this.order.status = 0;
-
       for (let i = 1; i <= this.selected; i++) {
-        console.log(`addOrder${i}回目！`);
-        console.log(this.order);
-        this.addOrder(this.order);
+        let order = {};
+
+        order.itemId = this.item.id;
+        order.name = this.item.name;
+        order.imagePath = this.item.imagePath;
+        order.price = this.item.price;
+        order.status = 0;
+
+        this.addOrder(order);
       }
 
       this.$router.push({ name: "Cart" }, () => {});
-
-      console.log(this.$store.state.orders);
     },
     numberChange() {
       this.total_price = this.item.price * this.selected;
