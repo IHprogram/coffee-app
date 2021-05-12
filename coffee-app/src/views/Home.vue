@@ -4,9 +4,9 @@
       <button @click="login" v-if="!$store.state.login_user">ログイン</button>
       <div v-if="$store.state.login_user">
         <button @click="logout">ログアウト</button>
-        <router-link :to="{name:'Cart'}">カート</router-link>
+        <p>ログイン中のユーザー : {{ userName }}</p>
       </div>
-      <p>ログイン中のユーザー : {{ userName }}</p>
+        <router-link :to="{name:'Cart'}">カート</router-link>
     </header>
   <div>
     <Search></Search>
