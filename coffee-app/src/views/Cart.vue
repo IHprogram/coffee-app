@@ -57,6 +57,7 @@
         <div class="col-xs-offset-5 col-xs-3">
           <div class="form-group">
             <div class="form-group text-center" v-if="orders.length != 0">
+              <router-link :to="{name:'OrderComfirm'}">
               <form action="order_confirm.html">
                 <input
                   class="form-control btn btn-warning btn-block mt-4"
@@ -64,10 +65,10 @@
                   value="注文に進む"
                 />
               </form>
+              </router-link>
             </div>
             <p class="text-center mt-4">
-              <router-link :to="{ name: 'Home' }"
-                >トップページに戻る</router-link
+              <router-link :to="{ name: 'Home' }">トップページに戻る</router-link
               >
             </p>
           </div>
