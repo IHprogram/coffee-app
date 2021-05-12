@@ -148,6 +148,9 @@ export default new Vuex.Store({
     addOrder(state,{id, order}){
       order.id = id;
       state.orders.push(order);
+    },
+    addOrder2(state, order){
+      state.orders.push(order);
     }
   },
   actions: {
@@ -175,7 +178,7 @@ export default new Vuex.Store({
               commit("addOrder", { id: doc.id, order });
             });
       }else{
-        commit("addOrder", { order });
+        commit("addOrder2", order );
       }
     }
   },
@@ -183,5 +186,15 @@ export default new Vuex.Store({
     userName: state => state.login_user ? state.login_user.displayName : '',
     getItemById: (state) => (id) => state.items.find((item) => item.id === id),
     uid: (state) => (state.login_user ? state.login_user.uid : null),
+    
+    order: state => {return state.orders.map(order => { //orderの中身はorders配列の要素一つ一つ
+      let orderItem = state.items.find(item => item.id === order.itemId)
+      return {
+        id: orderItem.id,
+        name: orderItem.name,
+        price: orderItem.price,
+      }
+    }
+    )}
   },
 });
