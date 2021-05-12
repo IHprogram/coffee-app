@@ -6,15 +6,15 @@
         <button @click="logout">ログアウト</button>
         <router-link :to="{name:'Cart'}">カート</router-link>
       </div>
-      <p>{{ userName }}</p>
+      <p>ログイン中のユーザー : {{ userName }}</p>
     </header>
-    <div>
-      <Search></Search>
-      <Items></Items>
+  <div>
+    <Search></Search>
+    <Items></Items>
     </div>
   </div>
 </template>
-
+      
 <script>
 import Items from "../components/Items.vue"
 import Search from '../components/Search.vue'
@@ -35,5 +35,4 @@ export default {
     ...mapGetters(["userName"])
   }
 }
-
 </script>
