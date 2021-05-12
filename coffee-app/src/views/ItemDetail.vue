@@ -48,8 +48,8 @@ export default {
     myClick() {
       console.log("myClickです！");
       this.order = {};
-      console.log("空にした後のthis.orderの中身");
-      console.log(this.order);
+      // console.log("空にした後のthis.orderの中身");
+      // console.log(this.order);
 
       this.order.itemId = this.item.id;
       this.order.name = this.item.name;
@@ -58,8 +58,8 @@ export default {
       this.order.status = 0;
 
       for (let i = 1; i <= this.selected; i++) {
-        console.log(`addOrder${i}回目！`);
-        console.log(this.order);
+        // console.log(`addOrder${i}回目！`);
+        // console.log(this.order);
         this.addOrder(this.order);
       }
 
