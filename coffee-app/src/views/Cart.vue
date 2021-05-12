@@ -21,7 +21,7 @@
               </tr>
               <tr
                 v-for="(order, index) in orders"
-                :key=order.id
+                :key=index
                 class="text-center"
               >
                 <td>

@@ -51,7 +51,6 @@ export default {
         order.itemId = this.item.id;
         order.status = 0;
         this.addOrder(order).then(()=>{
-          console.log("check")
         });
         console.log("AddOrder呼び出し")
       }
