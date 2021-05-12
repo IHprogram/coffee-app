@@ -53,11 +53,13 @@ export default {
         order.imagePath = this.item.imagePath;
         order.price = this.item.price;
         order.status = 0;
-
-        this.addOrder(order);
+        this.addOrder(order).then(()=>{
+          console.log("check")
+        });
+        console.log("AddOrder呼び出し")
       }
-
       this.$router.push({ name: "Cart" }, () => {});
+      console.log("ショッピングカートに画面遷移")
     },
     numberChange() {
       this.total_price = this.item.price * this.selected;

@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import ItemDetail from "../views/ItemDetail.vue";
 import Cart from "../views/Cart.vue"
+import OrderLog from "../views/OrderLog.vue"
 
 Vue.use(VueRouter);
 
@@ -25,6 +26,11 @@ const routes = [
     name: "Cart",
     component: Cart,
   },
+  {
+    path: "orderlog",
+    name: "OrderLog",
+    component: OrderLog
+  }
 ];
 
 const router = new VueRouter({

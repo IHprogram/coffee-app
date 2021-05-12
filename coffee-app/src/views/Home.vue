@@ -5,8 +5,12 @@
       <div v-if="$store.state.login_user">
         <button @click="logout">ログアウト</button>
         <p>ログイン中のユーザー : {{ userName }}</p>
+        <router-link :to="{name: 'OrderLog'}">
+        <p>注文履歴</p>
+        </router-link>
       </div>
         <router-link :to="{name:'Cart'}">カート</router-link>
+        
     </header>
   <div>
     <Search></Search>
