@@ -21,14 +21,14 @@
               </tr>
               <tr
                 v-for="(order, index) in orders"
-                :key="index"
+                :key=order.id
                 class="text-center"
               >
                 <td>
                   <router-link
                     :to="{
                       name: 'item_detail',
-                      params: { item_id: order.itemId },
+                      params: { item_id: order.id },
                     }"
                     >{{ order.name }}</router-link
                   >
