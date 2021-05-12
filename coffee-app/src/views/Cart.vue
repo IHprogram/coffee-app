@@ -85,8 +85,15 @@ export default {
   data() {
     return {
       orders: this.$store.state.orders,
+      items: this.$store.state.items
     };
   },
+  // created(){
+  //   console.log("itemId取得")
+  //   console.log(this.orders)
+  //   const object = this.$store.state.orders.itemId
+  //   console.log(object)
+  // },
   methods: {
     deleteOrder(index) {
       if (confirm("カートから削除しますか？")) this.orders.splice(index, 1);
