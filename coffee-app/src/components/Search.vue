@@ -20,10 +20,12 @@
           </tr>
           <tr v-else-if="searchitems.length>0">
             <th v-for="searchitem in searchitems" :key=searchitem.id>
-              <td>{{searchitem.name}}</td>
-              <!-- <td>{{searchitem.description}}</td> -->
-              <td>{{searchitem.price}}円</td>
-              <td><img :src="searchitem.imagePath"></td>
+               <router-link :to="{name: 'item_detail', params:{item_id: searchitem.id}}">
+                <td>{{searchitem.name}}</td> 
+                <!-- <td>{{searchitem.description}}</td> -->
+                <td>{{searchitem.price}}円</td>
+                <td><img :src="searchitem.imagePath"></td>
+               </router-link>
             </th>
           </tr>
           <tr v-else>
@@ -35,6 +37,7 @@
   </div>
 </div>
 </template>
+        
 
 <script>
 export default{
@@ -46,22 +49,19 @@ data(){
 },
 methods:{
   search(){
-  this.searchitems=[];
-  if(this.keyword===""){
-  return //処理が終了
+    this.searchitems=[];
+    if(this.keyword===""){
+    return //処理が終了
+    }
+    for(let i=0;i<this.$store.state.items.length;i++){
+    let string=this.$store.state.items[i].name
+    let substring=this.keyword
+
+    if(string.indexOf(substring)>-1){
+    this.searchitems.push(this.$store.state.items[i]);
+    console.log(this.searchitems)
+    }}
   }
-  for(let i=0;i<this.$store.state.items.length;i++){
-  let string=this.$store.state.items[i].name
-  let substring=this.keyword
-
-  if(string.indexOf(substring)>-1){
-  this.searchitems.push(this.$store.state.items[i]);
-  console.log(this.searchitems)
-  }
 }
-}
-}
-
-
 }
 </script>

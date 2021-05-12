@@ -95,11 +95,11 @@ export default {
   computed: {
     totalPrice() {
       const total = this.orders.reduce((a, b) => a + b.price, 0);
-      return total;
+      return Math.round(total);
     },
     taxPrice() {
       const tax = this.totalPrice * 0.1;
-      return tax;
+      return Math.round(tax);
     },
   },
 };
