@@ -48,9 +48,9 @@ export default ({
  },
   methods: {
     btnClick() {
+        this.errors = [];
       if(!this.name){
         console.log("変更です")
-        this.errors = []
         this.errors.push("名前を変更してください");
         
         // this.Validation.name = '名前を入力してください'
