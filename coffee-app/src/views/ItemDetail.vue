@@ -57,15 +57,11 @@ export default {
       this.order.price = this.item.price;
       this.order.status = 0;
 
-      // if (this.selected > 1) {
       for (let i = 1; i <= this.selected; i++) {
         console.log(`addOrder${i}回目！`);
         console.log(this.order);
         this.addOrder(this.order);
       }
-      // } else if (this.selected === 1) {
-      //   this.addOrder(this.order);
-      // }
 
       this.$router.push({ name: "Cart" }, () => {});
 
