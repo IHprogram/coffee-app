@@ -33,7 +33,7 @@
                     >{{ order.name }}</router-link
                   >
                 </td>
-                <td>{{ order.price }}</td>
+                <td>{{ order.price }}円</td>
                 <td><button @click="deleteOrder(index)">削除</button></td>
               </tr>
               <tr v-if="orders.length === 0">
@@ -50,7 +50,7 @@
             <span id="total-price"
               >ご注文金額合計：{{ totalPrice }}円(税込)</span
             ><br />
-            <span id="total-price">内消費税：{{ taxPrice }}円(税込)</span>
+            <span id="total-price">内消費税：{{ taxPrice }}円</span>
           </div>
         </div>
       </div>
