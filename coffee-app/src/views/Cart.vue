@@ -88,7 +88,9 @@ export default {
   },
   methods: {
     deleteOrder(index) {
-      if (confirm("カートから削除しますか？")) this.orders.splice(index, 1);
+      if (confirm("カートから削除しますか？"))
+      this.$store.state.orders.splice(index, 1);
+      console.log("deleteOrderです");
     },
   },
   computed: {
@@ -99,6 +101,9 @@ export default {
     taxPrice() {
       const tax = this.totalPrice * 0.1;
       return Math.round(tax);
+    },
+    orders() {
+      return this.$store.getters.order;
     },
   },
 };

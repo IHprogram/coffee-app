@@ -49,9 +49,6 @@ export default {
         let order = {};
 
         order.itemId = this.item.id;
-        order.name = this.item.name;
-        order.imagePath = this.item.imagePath;
-        order.price = this.item.price;
         order.status = 0;
         this.addOrder(order).then(()=>{
           console.log("check")
