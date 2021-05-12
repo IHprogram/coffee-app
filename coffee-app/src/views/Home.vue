@@ -1,12 +1,12 @@
 <template>
   <div class="home">
     <header>
-      <button @click="login" v-if="!$store.state.login_user">ログイン</button>
-      <div v-if="$store.state.login_user">
+        <button @click="login" v-if="!$store.state.login_user" class="">ログイン</button>
+        <div v-if="$store.state.login_user">
         <button @click="logout">ログアウト</button>
         <p>ログイン中のユーザー : {{ userName }}</p>
-      </div>
-        <router-link :to="{name:'Cart'}">カート</router-link>
+        </div>
+       <router-link :to="{name:'Cart'}"><button class="btn btn-primary">カート</button></router-link>
     </header>
   <div>
     <Search></Search>
