@@ -26,7 +26,7 @@ export default {
   name: 'Home',
   components: {
     Items,
-    Search
+    Search,
   },
   methods: {
     ...mapActions(["login","logout"])
