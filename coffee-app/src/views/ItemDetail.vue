@@ -52,9 +52,6 @@ export default {
         // console.log("空にした後のthis.orderの中身");
         // console.log(this.order);
         order.itemId = this.item.id;
-        order.name = this.item.name;
-        order.imagePath = this.item.imagePath;
-        order.price = this.item.price;
         order.status = 0;
 
         this.addOrder(order);

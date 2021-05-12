@@ -21,7 +21,7 @@
               </tr>
               <tr
                 v-for="(order, index) in orders"
-                :key="order.id"
+                :key="index"
                 class="text-center"
               >
                 <td>
@@ -84,12 +84,14 @@ export default {
   name: "Cart",
   data() {
     return {
-      orders: this.$store.state.orders,
+      // orders: this.$store.state.orders,
     };
   },
   methods: {
     deleteOrder(index) {
-      if (confirm("カートから削除しますか？")) this.orders.splice(index, 1);
+      if (confirm("カートから削除しますか？"))
+        this.$store.state.orders.splice(index, 1);
+      console.log("deleteOrderです");
     },
   },
   computed: {
@@ -100,6 +102,9 @@ export default {
     taxPrice() {
       const tax = this.totalPrice * 0.1;
       return Math.round(tax);
+    },
+    orders() {
+      return this.$store.getters.order;
     },
   },
 };
