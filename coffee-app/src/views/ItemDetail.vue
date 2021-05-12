@@ -9,7 +9,7 @@
     <p>商品のID: {{ item.id }}</p>
     <p>商品名: {{ item.name }}</p>
     <p>説明: {{ item.description }}</p>
-    <p>価格: {{ item.price }}円（税抜き）</p>
+    <p>価格: {{ item.price }}円（税込み）</p>
 
     <select v-model="selected" @change="numberChange">
       <option>1</option>
@@ -26,7 +26,7 @@
       <option>12</option>
     </select>
 
-    <p>合計:{{ total_price }}円（税抜き）</p>
+    <p>合計:{{ total_price }}円（税込み）</p>
 
     <button type="button" @click="myClick">カートに入れる</button>
   </div>
