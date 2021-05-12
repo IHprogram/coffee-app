@@ -7,20 +7,20 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     orders: [ 
-      {
-        id:1,
-        name: "Gorgeous4サンド",
-        description: "人気の定番具材「ハム」と「チキン」をセットにした食べごたえ抜群のサンドイッチです。",
-        price: 480,
-        imagePath: require("../assets/img/1.jpg")
-      },
-      {
-        id:2,
-        name: "エスプレッソフラペチーノ",
-        description: "ひと口目に感じるエスプレッソは「リストレット」という方法で抽出した力強い香りと優しい苦味を、ふた口目は全体を混ぜて、こだわりのクリームから来るアフォガートのような味わいをお楽しみください。リフレッシュしたい時や、ほっとひと息つきたい時にも、何度でも飲みたくなるフラペチーノ®です.",
-        price: 530,
-        imagePath: require("../assets/img/2.jpg")
-      },
+      // {
+      //   id:1,
+      //   name: "Gorgeous4サンド",
+      //   description: "人気の定番具材「ハム」と「チキン」をセットにした食べごたえ抜群のサンドイッチです。",
+      //   price: 480,
+      //   imagePath: require("../assets/img/1.jpg")
+      // },
+      // {
+      //   id:2,
+      //   name: "エスプレッソフラペチーノ",
+      //   description: "ひと口目に感じるエスプレッソは「リストレット」という方法で抽出した力強い香りと優しい苦味を、ふた口目は全体を混ぜて、こだわりのクリームから来るアフォガートのような味わいをお楽しみください。リフレッシュしたい時や、ほっとひと息つきたい時にも、何度でも飲みたくなるフラペチーノ®です.",
+      //   price: 530,
+      //   imagePath: require("../assets/img/2.jpg")
+      // },
   ],
     login_user: null,
     items: [
@@ -160,7 +160,10 @@ export default new Vuex.Store({
     deleteLoginUser(state) {
       state.login_user = null;
     },
-    
+    addOrder(state,{id, order}){
+      order.id = id;
+      state.orders.push(order);
+    }
   },
   actions: {
     setLoginUser({ commit }, user) {
@@ -176,13 +179,24 @@ export default new Vuex.Store({
     deleteLoginUser({ commit }) {
       commit("deleteLoginUser");
     },
-    addOrder({ commit }, item) {
-      commit("addOrder", item);
-    },
-
+    addOrder({ getters, commit }, order) {
+      if (getters.uid) {
+          order.userId = getters.uid;
+          firebase
+            .firestore()
+            .collection(`users/${getters.uid}/order`)
+            .add(order)
+            .then((doc) => {
+              commit("addOrder", { id: doc.id, order });
+            });
+      }else{
+        commit("addOrder", { order });
+      }
+    }
   },
   getters: {
     userName: state => state.login_user ? state.login_user.displayName : '',
     getItemById: (state) => (id) => state.items.find((item) => item.id === id),
+    uid: (state) => (state.login_user ? state.login_user.uid : null),
   },
 });
