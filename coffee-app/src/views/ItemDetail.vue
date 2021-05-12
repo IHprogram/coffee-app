@@ -47,7 +47,10 @@ export default {
     myClick() {
       for (let i = 1; i <= this.selected; i++) {
         let order = {};
-
+        console.log("myClickです！");
+        this.order = {};
+        // console.log("空にした後のthis.orderの中身");
+        // console.log(this.order);
         order.itemId = this.item.id;
         order.name = this.item.name;
         order.imagePath = this.item.imagePath;
@@ -56,7 +59,6 @@ export default {
 
         this.addOrder(order);
       }
-
       this.$router.push({ name: "Cart" }, () => {});
     },
     numberChange() {

@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <header>
-        <button @click="login" v-if="!$store.state.login_user" class="">ログイン</button>
+        <button @click="login" v-if="!$store.state.login_user">ログイン</button>
         <div v-if="$store.state.login_user">
         <button @click="logout">ログアウト</button>
         <p>ログイン中のユーザー : {{ userName }}</p>
