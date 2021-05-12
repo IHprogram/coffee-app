@@ -40,7 +40,8 @@
       <div class="row">
         <div class="col-xs-offset-2 col-xs-8">
           <div class="form-group text-center" v-if="orders.length != 0">
-            <span id="total-price">ご注文金額合計：{{totalPrice}}円(税込)</span>
+            <span id="total-price">ご注文金額合計：{{totalPrice}}円(税込)</span><br>
+            <span id="total-price">内消費税：{{taxPrice}}円(税込)</span>
           </div>
         </div>
       </div>
@@ -48,10 +49,12 @@
       <div class="row">
         <div class="col-xs-offset-5 col-xs-3">
           <div class="form-group">
-            <form action="order_confirm.html">
-              <input class="form-control btn btn-warning btn-block mt-4"
-                type="submit" value="注文に進む">
-            </form>
+            <div class="form-group text-center" v-if="orders.length != 0">
+              <form action="order_confirm.html">
+                <input class="form-control btn btn-warning btn-block mt-4"
+                  type="submit" value="注文に進む">
+              </form>
+            </div>
             <p class="text-center mt-4"><router-link :to="{name: 'Home'}">トップページに戻る</router-link></p>
           </div>
         </div>
@@ -59,7 +62,6 @@
     </div>
   </div>
 </template>
-
 
 <script>
 export default{
@@ -76,18 +78,13 @@ export default{
     },
   },
   computed: {
-    // totalPrice(){
-    //   console.log(this.orders)
-    //   console.log(this.orders.length)
-    //   let total = 0
-    //   for(let i = 0 ; i <= this.orders.length ; i++){
-    //     total += this.orders[i].price;
-    //   }
-    //   return total;
-    // }
     totalPrice(){
       const total = this.orders.reduce((a, b) => a + b.price, 0)
       return total;
+    },
+    taxPrice(){
+      const tax = this.totalPrice * 0.1;
+      return tax;
     }
   }
 };
