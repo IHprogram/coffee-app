@@ -148,9 +148,6 @@ export default new Vuex.Store({
     addOrder(state,{id, order}){
       order.id = id;
       state.orders.push(order);
-    },
-    addOrder2(state, order){
-      state.orders.push(order);
     }
   },
   actions: {
@@ -167,7 +164,7 @@ export default new Vuex.Store({
     deleteLoginUser({ commit }) {
       commit("deleteLoginUser");
     },
-    addOrder({ getters, commit }, order) {
+   addOrder({ getters, commit }, order) {
       if (getters.uid) {
           order.userId = getters.uid;
           firebase

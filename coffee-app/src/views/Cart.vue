@@ -21,14 +21,14 @@
               </tr>
               <tr
                 v-for="(order, index) in orders"
-                :key="index"
+                :key=index
                 class="text-center"
               >
                 <td>
                   <router-link
                     :to="{
                       name: 'item_detail',
-                      params: { item_id: order.itemId },
+                      params: { item_id: order.id },
                     }"
                     >{{ order.name }}</router-link
                   >
@@ -84,19 +84,18 @@ export default {
   name: "Cart",
   data() {
     return {
-      // orders: this.$store.state.orders,
     };
   },
   methods: {
     deleteOrder(index) {
       if (confirm("カートから削除しますか？"))
-        this.$store.state.orders.splice(index, 1);
+      this.$store.state.orders.splice(index, 1);
       console.log("deleteOrderです");
     },
   },
   computed: {
     totalPrice() {
-      const total = this.orders.reduce((a, b) => a + b.price, 0);
+      const total = this.orders.reduce((a, b) => a + b.price, 0)
       return Math.round(total);
     },
     taxPrice() {

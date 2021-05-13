@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import ItemDetail from "../views/ItemDetail.vue";
 import Cart from "../views/Cart.vue"
-import Order from "../views/Order.vue";
+import OrderLog from "../views/OrderLog.vue"
 
 Vue.use(VueRouter);
 
@@ -27,9 +27,9 @@ const routes = [
     component: Cart,
   },
   {
-    path: "/order",
-    name: "Order",
-    component: Order
+    path: "orderlog",
+    name: "OrderLog",
+    component: OrderLog,
   }
 ];
 
