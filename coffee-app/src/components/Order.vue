@@ -48,7 +48,7 @@ export default ({
  },
   methods: {
     btnClick() {
-        this.errors = [];
+      this.errors = [];
       if(!this.name){
         console.log("変更です")
         this.errors.push("名前を変更してください");
