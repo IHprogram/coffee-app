@@ -21,7 +21,7 @@
               </tr>
               <tr
                 v-for="(order, index) in orders"
-                :key=index
+                :key="index"
                 class="text-center"
               >
                 <td>
@@ -34,7 +34,7 @@
                   >
                 </td>
                 <td>{{ order.price }}円</td>
-                <td><button @click="deleteOrder(index)">削除</button></td>
+                <td><button @click="deleteOrder(order)">削除</button></td>
               </tr>
               <tr v-if="orders.length === 0">
                 <td class="text-center">カートに商品がありません</td>
@@ -53,22 +53,27 @@
           </div>
         </div>
       </div>
-      <div class="row" >
+      <div class="row">
         <div class="col-xs-offset-5 col-xs-3">
           <div class="form-group">
-            <div class="form-group text-center" v-if="orders.length != 0" @click="LoginComfirm">
-              <router-link :to="{name:'OrderComfirm'}">
-              <form action="order_confirm.html">
-                <input
-                  class="form-control btn btn-warning btn-block mt-4"
-                  type="submit"
-                  value="注文に進む"
-                />
-              </form>
+            <div
+              class="form-group text-center"
+              v-if="orders.length != 0"
+              @click="LoginComfirm"
+            >
+              <router-link :to="{ name: 'OrderComfirm' }">
+                <form action="order_confirm.html">
+                  <input
+                    class="form-control btn btn-warning btn-block mt-4"
+                    type="submit"
+                    value="注文に進む"
+                  />
+                </form>
               </router-link>
             </div>
             <p class="text-center mt-4">
-              <router-link :to="{ name: 'Home' }">トップページに戻る</router-link
+              <router-link :to="{ name: 'Home' }"
+                >トップページに戻る</router-link
               >
             </p>
           </div>
@@ -78,34 +83,46 @@
   </div>
 </template>
 <script>
-import {mapActions} from "vuex"
-import {mapGetters} from "vuex"
+import { mapActions } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   name: "Cart",
   data() {
-    return {
-    };
+    return {};
   },
   methods: {
-    deleteOrder(index) {
-      if (confirm("カートから削除しますか？"))
-      this.$store.state.orders.splice(index, 1);
+    deleteOrder(order) {
+      if (confirm("カートから削除しますか？")) {
+        if (this.$store.state.login_user != null) {
+          console.log(order);
+          let orderItem = this.$store.state.orders.find(
+            (element) => element.itemId === order.id
+          );
+          console.log(orderItem);
+          let orderItemId = orderItem.id;
+          console.log(orderItemId);
+          this.deleteItem({ orderItemId });
+        } else {
+          console.log("私です");
+          this.logoutDeleteItem(order);
+        }
+      }
       console.log("deleteOrderです");
     },
-    LoginComfirm(){
-        if(!this.$store.getters.uid){
-            this.login()
-        }else{
-            console.log("ログイン済");
-        }
+    LoginComfirm() {
+      if (!this.$store.getters.uid) {
+        this.login();
+      } else {
+        console.log("ログイン済");
+      }
     },
-...mapGetters(["uid"]),
-...mapActions(["login",'deleteOrders']),
+    ...mapGetters(["uid"]),
+    ...mapActions(["login", "deleteItem", "logoutDeleteItem"]),
   },
   computed: {
     totalPrice() {
-      const total = this.orders.reduce((a, b) => a + b.price, 0)
+      const total = this.orders.reduce((a, b) => a + b.price, 0);
       return Math.round(total);
     },
     taxPrice() {
