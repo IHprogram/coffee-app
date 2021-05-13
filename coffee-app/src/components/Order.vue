@@ -3,16 +3,17 @@
     <h3 class="text-center">注文画面</h3>
       <h4 class="text-center">お届け先情報</h4>
       <hr>
-        <div v-if="errors.length">
+        <!-- <div v-if="errors.length">
           <b>各項目 入力は必須です</b>
           <ul>
-            <li :v-for="error in errors">{{ error }}</li>
+            <li :v-for="error in errors">{{ errors }}</li>
           </ul>
-        </div>
+        </div> -->
+
         <div><label for="name">名前：
-          <input type="text" name="name" id="name" v-model="name">{{error}}</label></div>
+          <input type="text" name="name" id="name" v-model="name">{{ errors }}</label></div>
         <div><label for="mail">メールアドレス:
-          <input type="email" name="email" id="email" v-model="email">{{error}}</label></div>
+          <input type="email" name="email" id="email" v-model="email"></label></div>
         <div><label for="postalcode">郵便番号:
           <input type="number" name="postalcode" id="postalcode" v-model="postalcode"></label></div>
         <div><label for="address">住所:
@@ -36,7 +37,7 @@ export default ({
  name: "Order",
  data(){
    return {
-    errors:[],
+    errors:'',
     name: null,
     email:null,
     postalcode: null,
@@ -47,26 +48,32 @@ export default ({
    }
  },
   methods: {
-    btnClick() {
-        this.errors = [];
+    btnClick:function() {
+        this.errors = []
       if(!this.name){
-        console.log("変更です")
+        console.log("変更です");
         this.errors.push("名前を変更してください");
-        
-        // this.Validation.name = '名前を入力してください'
-        // console.log("エラーです")
       }
+
+      // if(!this.email){
+      //   console.log("変更２");
+      //   this.errors.push("メールアドレスを変更してください");
+      // } else if (this.email.indexOf('@') === -1){
+      //   console.log("メール変更");
+      //   this.errors.push("メールアドレスの形式が不正です")
+      // }
     }
   },
-  // computed: {
+  computed: {
+    // isInValidName(){
+    //   return this.name.length > 0 
+    // },
   //   error() {
   //     if(!this.name){
-        
         // this.errors("名前を入力してください");
         // return this.name ?  '' : "名前を入力してください"
-        // return this.email
   //     }
   //   }
-  // }
+  }
 })
 </script>
