@@ -48,7 +48,7 @@
     <div class="row">
         <div class="col-xs-offset-5 col-xs-2">
             <div class="form-group">
-                <button @click="LoginComfirm">お届け先情報と商品詳細を入力する</button>
+                <!-- <button @click="LoginComfirm">お届け先情報と商品詳細を入力する</button> -->
                <!-- <form>
                     <input class="form-control btn btn-warning btn-block" type="submit" value="お届け先情報と支払方法を入力する">
                 </form> -->
