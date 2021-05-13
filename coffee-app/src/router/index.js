@@ -7,7 +7,6 @@ import OrderFinished from "../views/OrderFinished.vue"
 import OrderComfirm from "../views/OrderComfirm.vue"
 import OrderLog from "../views/OrderLog.vue"
 
-
 Vue.use(VueRouter);
 
 import "bootstrap/dist/css/bootstrap.css";

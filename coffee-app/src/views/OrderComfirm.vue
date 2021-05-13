@@ -4,7 +4,6 @@
       <div class="table-responsive col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-10 col-xs-12">
         <h3 class="text-center">注文内容確認</h3>
           </div>
-            <!-- ここに注文内容を表示する -->
              <table class="table table-striped item-list-table mt-4">
             <tbody>
               <tr>
@@ -24,7 +23,7 @@
                   <router-link
                     :to="{
                       name: 'item_detail',
-                      params: { item_id: order.itemId },
+                      params: { item_id: order.id },
                     }"
                     >{{ order.name }}</router-link
                   >
@@ -44,14 +43,9 @@
           </div>
         </div>
       </div>
-  <!-- <router-link :to="{name:'Home'}"> -->
     <div class="row">
         <div class="col-xs-offset-5 col-xs-2">
             <div class="form-group">
-                <!-- <button @click="LoginComfirm">お届け先情報と商品詳細を入力する</button> -->
-               <!-- <form>
-                    <input class="form-control btn btn-warning btn-block" type="submit" value="お届け先情報と支払方法を入力する">
-                </form> -->
                 <Order/>
             </div>
                    <router-link :to="{name:'Home'}">
@@ -68,16 +62,8 @@
         </router-link>
         </div>
     </div>
-<!-- </router-link> -->
 </div>
-
-
-
-
-
 </template>
-
-
 
 <script>
 import {mapActions} from "vuex"
@@ -90,8 +76,8 @@ export default{
     },
     name:"OrderComfirm",
     data(){
-        return{
-   //orders: this.$store.state.orders,
+      return{
+        obj : {}
     }
 },
 methods:{
@@ -114,7 +100,7 @@ methods:{
       const tax = this.totalPrice * 0.1;
       return Math.round(tax);
     },
-        orders() {
+    orders() {
       return this.$store.getters.order;
     },
   }

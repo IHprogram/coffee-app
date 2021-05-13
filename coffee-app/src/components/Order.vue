@@ -3,28 +3,34 @@
     <h3 class="text-center">注文画面</h3>
       <h4 class="text-center">お届け先情報</h4>
       <hr>
-        <!-- <div v-if="errors.length">
-          <b>各項目 入力は必須です</b>
-          <ul>
-            <li :v-for="error in errors">{{ error }}</li>
-          </ul>
-        </div> -->
-        <div><label for="name">名前：
-          <input type="text" name="name" id="name" v-model="loginForm.name">{{errorFind.nameError}}</label></div>
-        <div><label for="mail">メールアドレス:
-          <input type="email" name="email" id="email" v-model="loginForm.email">{{errorFind.emailError}}</label></div>
-        <div><label for="postalcode">郵便番号:
-          <input type="text" name="postalcode" id="postalcode" v-model="loginForm.postalcode">{{errorFind.postalcodeError}}</label></div>
-        <div><label for="address">住所:
-          <input type="text" name="address" id="address" v-model="loginForm.address">{{errorFind.addressError}}</label></div>
-        <div><label for="tel">電話番号:
-          <input type="tel" name="tel" id="tel" v-model="loginForm.tel">{{errorFind.telError}}</label></div>
-        <div><label for="date">配達日時:
-          <input type="datetime-local" name="date" id="date" v-model="loginForm.date">{{errorFind.dateError}}</label></div>
+        <div>
+          <label for="name">名前：
+          <input type="text" name="name" id="name" v-model="loginForm.name">{{errorFind.nameError}}</label>
+        </div>
+        <div>
+          <label for="mail">メールアドレス:
+          <input type="email" name="email" id="email" v-model="loginForm.email">{{errorFind.emailError}}</label>
+        </div>
+        <div>
+          <label for="postalcode">郵便番号:
+          <input type="text" name="postalcode" id="postalcode" v-model="loginForm.postalcode">{{errorFind.postalcodeError}}</label>
+        </div>
+        <div>
+          <label for="address">住所:
+          <input type="text" name="address" id="address" v-model="loginForm.address">{{errorFind.addressError}}</label>
+        </div>
+        <div>
+          <label for="tel">電話番号:
+          <input type="tel" name="tel" id="tel" v-model="loginForm.tel">{{errorFind.telError}}</label>
+        </div>
+        <div>
+          <label for="date">配達日時:
+          <input type="datetime-local" name="date" id="date" v-model="loginForm.date">{{errorFind.dateError}}</label>
+        </div>
         <p>支払い方法：
-          <select name="payment" id="pay" value="支払い方法">
-            <option value="0:未入金" id="1">代金引換</option>
-            <option value="1:入金済" id="2">クレジットカード決済</option>
+          <select name="payment" id="pay" value="支払い方法" v-model="loginForm.pay">
+            <option value=0 id="1">代金引換</option>
+            <option value=1 id="2">クレジットカード決済</option>
           </select>
         </p>
         <input type="submit" @click="btnClick" class="btn btn-info" value="この内容で注文する">
@@ -32,12 +38,11 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default ({
  name: "Order",
  data(){
    return {
-    // errors:[],
-    // messages:'',
     loginForm: {
       name: "",
       email:"",
@@ -45,7 +50,7 @@ export default ({
       address: "",
       tel: "",
       date: "",
-      // pay: "",
+      pay: "",
     },
     errorFind: {
       nameError: "",
@@ -58,6 +63,8 @@ export default ({
    }
  },
   methods: {
+    ...mapActions(["updateOrder"]),
+    
     btnClick() {
       if(!this.loginForm.name){
         this.errorFind.nameError = "名前を変更してください"
@@ -83,7 +90,7 @@ export default ({
       }
 
        if(!this.loginForm.address){
-        this.errorFind.addressError = "住所を変更してください"
+         this.errorFind.addressError = "住所を変更してください"
       } else if (this.loginForm.address){
         this.errorFind.addressError = ""
       }
@@ -97,23 +104,12 @@ export default ({
       }
 
       //配達日時の指定
-
+  
         const today = new Date();
         const year = today.getFullYear()
         const month = "0" + (1 + today.getMonth())
         const day = today.getDate()
         const hour = today.getHours()
-        const minutes = today.getMinutes()
-
-          let orderDay = 'YYYY-MM-DD'+'T'+'hh:mm'        //現在日時
-          orderDay = orderDay.replace(/YYYY/g, year);
-          orderDay = orderDay.replace(/MM/g, month);
-          orderDay = orderDay.replace(/DD/g, day);
-          orderDay = orderDay.replace(/hh/g, hour);
-          orderDay = orderDay.replace(/mm/g, minutes);
-
-        console.log(this.loginForm.date)
-        console.log(orderDay);
 
         const loginFormDate = this.loginForm.date;
         console.log("配達日全部"+loginFormDate)
@@ -149,22 +145,27 @@ export default ({
           this.errorFind.dateError=""
         }
 
-
-        //条件
-        // ①配達日時と今日の日にちが一致しているか
-        // ②①が一致していた場合、希望時間ーその注文している時の時間（現在時間）＝３未満だったらエラー発動
-
-    // if(this.loginForm.date === orderDay){
-    //   console.log("一致している")
-      // if(!this.loginForm.date) {
-      //    this.loginForm.dateError = "配達日時を入力して下さい"
-      // } else if((this.loginForm.date - orderDay) < 3){
-      //   this.loginForm.dateError = "今から3時間後の日時をご入力ください"
-      // // } else if(!this.loginForm.date) {
-      // //    this.loginForm.dateError = "配達日時を入力して下さい"
-      // } else {
-      //   this.loginForm.dateError = ""
-      // }
+      if((this.errorFind.nameError === '') && (this.errorFind.emailError === '') && (this.errorFind.postalcodeError === '') && (this.errorFind.addressError === '') && (this.errorFind.telError === '') && (this.errorFind.dateError === '')){
+ 
+        this.$store.state.orders.forEach(order =>{
+        
+        order.orderName = this.loginForm.name
+        order.orderZipcode = this.loginForm.postalcode
+        order.orderEmail = this.loginForm.email
+        order.orderTel = this.loginForm.tel
+        order.orderTime = this.loginForm.date
+        order.orderAddress = this.loginForm.address
+        order.orderPay = Number(this.loginForm.pay)
+        console.log(typeof order.orderPay)
+        this.updateOrder({id: order.id, order2: order})
+        console.log("updateOrder呼び出し")
+        })
+        this.$router.push({name: 'OrderFinished'}, () =>{})
+        console.log("注文完了画面に遷移")
+      }else{
+        this.$router.push({name: 'OrderComfirm'}, () =>{})
+        console.log("注文ページにとどまる")
+      }
     }
   },
 })

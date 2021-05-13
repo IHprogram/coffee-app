@@ -6,7 +6,7 @@
   </div>
   <div class="text-center">
     <button type="submit" value="検索" class="btn btn-primary" @click="search">検索</button>
-    <button type="reset" value="クリア" class="btn btn-default">クリア</button>
+    <button type="reset" value="クリア" class="btn btn-default" @click="clear">クリア</button>
   </div>
   <div class="row">
     <div class="table-responsive col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-10 col-xs-12">
@@ -40,28 +40,32 @@
         
 
 <script>
-export default{
-data(){
-  return{
-    searchitems:[],
-    keyword:""
-  };
-},
-methods:{
-  search(){
-    this.searchitems=[];
-    if(this.keyword===""){
-    return //処理が終了
-    }
-    for(let i=0;i<this.$store.state.items.length;i++){
-    let string=this.$store.state.items[i].name
-    let substring=this.keyword
+export default {
+  data() {
+    return {
+      searchitems: [],
+      keyword: "",
+    };
+  },
+  methods: {
+    search() {
+      this.searchitems = [];
+      if (this.keyword === "") {
+        return; //処理が終了
+      }
+      for (let i = 0; i < this.$store.state.items.length; i++) {
+        let string = this.$store.state.items[i].name;
+        let substring = this.keyword;
 
-    if(string.indexOf(substring)>-1){
-    this.searchitems.push(this.$store.state.items[i]);
-    console.log(this.searchitems)
-    }}
-  }
-}
-}
+        if (string.indexOf(substring) > -1) {
+          this.searchitems.push(this.$store.state.items[i]);
+          console.log(this.searchitems);
+        }
+      }
+    },
+    clear() {
+      this.keyword = "";
+    },
+  },
+};
 </script>
