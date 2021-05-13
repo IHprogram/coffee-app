@@ -7,6 +7,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     orders: [],
+    confirmOrder: [],
     login_user: null,
     items: [
       
@@ -148,6 +149,8 @@ export default new Vuex.Store({
     addOrder(state,{id, order}){
       order.id = id;
       state.orders.push(order);
+      console.log("オーダー内容確認")
+      console.log(order)
     },
     addOrder2(state, order){
       state.orders.push(order);
@@ -185,6 +188,9 @@ export default new Vuex.Store({
       firebase.firestore().collection(`users/${getters.uid}/order`).get().then(snapshot=> {
           snapshot.forEach(doc=>commit('addOrder',{id: doc.id,order: doc.data()}))
       })
+    },
+    addComfirmOrder({commit}, comfirmOrder){
+      commit("addComfirmOrder", comfirmOrder)
     },
   },
   getters: {
