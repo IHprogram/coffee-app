@@ -1,30 +1,29 @@
 <template>
   <div id="app">
     <div id="nav">
-    <router-view/>
+      <router-view />
     </div>
   </div>
 </template>
 
 <script>
-import firebase from 'firebase'
-import { mapActions } from 'vuex'
+import firebase from "firebase";
+import { mapActions } from "vuex";
 
-export default ({
-  components: {
-  },
-  beforeCreate(){
-  firebase.auth().onAuthStateChanged(user => {
-      if(user){
-        this.setLoginUser(user)
+export default {
+  components: {},
+  beforeCreate() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setLoginUser(user);
         this.fetchOrders();
       } else {
-        this.deleteLoginUser()
-        this.$store.state.orders=[]
+        this.deleteLoginUser();
+        this.$store.state.orders = [];
       }
-    })
+    });
   },
-  created(){
+  created() {
     // firebase.auth().onAuthStateChanged(user => {
     //   if(user){
     //     this.setLoginUser(user)
@@ -34,9 +33,9 @@ export default ({
     //     this.$store.state.orders=[]
     //   }
     // })
- },
+  },
   methods: {
-    ...mapActions(['setLoginUser','deleteLoginUser','fetchOrders'])
-  }
-})
+    ...mapActions(["setLoginUser", "deleteLoginUser", "fetchOrders"]),
+  },
+};
 </script>

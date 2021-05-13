@@ -7,6 +7,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     orders: [],
+    order_history: [],
     login_user: null,
     items: [
       
@@ -159,7 +160,22 @@ export default new Vuex.Store({
     logoutDeleteItem(state, order){
       let order1 = state.orders.findIndex(element => element.itemId === order.id);
       state.orders.splice(order1, 1);
-    }
+    },
+    addOrderHistory(state,{id, order}){
+      console.log('addOrderHistoryです');
+      console.log(id);
+      console.log(state);
+      order.id = id;
+      console.log(order);
+
+      let orderedItem = state.items.find((item) => item.id === order.itemId);
+      console.log('注文された商品です');
+      console.log(orderedItem);
+
+      state.order_history.push(orderedItem);
+      console.log('state.order_historyの中身です')
+      console.log(state.order_history);
+    },
     },
   actions: {
     setLoginUser({ commit }, user) {
@@ -190,8 +206,19 @@ export default new Vuex.Store({
       }
     },
     fetchOrders({getters,commit}){
+      // firebase.firestore().collection(`users/${getters.uid}/order`).get().then(snapshot=> {
+      //     snapshot.forEach(doc=>commit('addOrder',{id: doc.id,order: doc.data()}))
+      // })
       firebase.firestore().collection(`users/${getters.uid}/order`).get().then(snapshot=> {
-          snapshot.forEach(doc=>commit('addOrder',{id: doc.id,order: doc.data()}))
+        snapshot.forEach(doc =>{
+            if(doc.data().status === 0){
+              // console.log('doc.data()のなかみ');
+              // console.log(doc.data().status);
+              commit('addOrder',{id: doc.id,order: doc.data()})
+            }else{
+              commit('addOrderHistory', {id: doc.id,order: doc.data()})
+            }
+        })
       })
     },
     deleteItem({getters, commit}, {orderItemId}){
@@ -213,8 +240,12 @@ export default new Vuex.Store({
     userName: state => state.login_user ? state.login_user.displayName : '',
     getItemById: (state) => (id) => state.items.find((item) => item.id === id),
     uid: (state) => (state.login_user ? state.login_user.uid : null),
+
+    getCarts: state => {
+      return state.orders.filter(order => order.status === 0)
+    },
     
-    order: state => {return state.orders.map(order => { //orderの中身はorders配列の要素一つ一つ
+    order: (state, getters) => {return getters.getCarts.map(order => { //orderの中身はorders配列の要素一つ一つ
       let orderItem = state.items.find(item => item.id === order.itemId)
       let array = {
         id: orderItem.id,

@@ -16,13 +16,27 @@
                   <div class="text-center">価格(税込)</div>
                 </th>
               </tr>
-              <tr>
-                <td><p>Soccer</p></td>
-                <td>100円</td>
+              <tr
+                v-for="(order, index) in orders"
+                :key="index"
+                class="text-center"
+              >
+                <td>
+                  <router-link
+                    :to="{
+                      name: 'item_detail',
+                      params: { item_id: order.id },
+                    }"
+                    >{{ order.name }}
+                  </router-link>
+                </td>
+                <td>{{ order.price }}円</td>
               </tr>
             </tbody>
           </table>
-          <h4 class="text-center">※注文履歴はありません</h4>
+          <h4 class="text-center" v-if="orders.length === 0">
+            ※注文履歴はありません
+          </h4>
         </div>
       </div>
       <div class="row">
@@ -40,13 +54,15 @@
   </div>
 </template>
 <script>
-export default{
+export default {
   name: "OrderLog",
-  data(){
-    return{
-
-    }
+  data() {
+    return {
+      orders: [],
+    };
   },
-
-}
+  created() {
+    this.orders = this.$store.state.order_history;
+  },
+};
 </script>
