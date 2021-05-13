@@ -115,6 +115,41 @@ export default ({
         console.log(this.loginForm.date)
         console.log(orderDay);
 
+        const loginFormDate = this.loginForm.date;
+        console.log("配達日全部"+loginFormDate)
+
+       const loginformyear = loginFormDate.slice(0,4)
+       console.log("今年は"+year);//2021
+        console.log("配達年は"+loginformyear);//2021
+
+        const loginformmonth = loginFormDate.slice(5,7)
+        console.log("今月は"+month);//05
+        console.log("配達月は"+loginformmonth);//05
+
+        const loginformday = loginFormDate.slice(8,10)
+        console.log("今年は"+day);//13
+        console.log("配達日は"+loginformday);//13
+
+        const loginformhour = loginFormDate.slice(11,13)
+        console.log("現在時間は"+hour);
+        console.log("配達時間は"+loginformhour);
+
+        const numloginformhour=Number(loginformhour);//文字列から数値に変換
+        console.log(numloginformhour)
+        const numhour = Number(hour);//文字列から数値に変換
+        console.log(numloginformhour-numhour)
+
+        if(day==loginformday){
+          console.log("同じ日です");//条件1「今日と配達日の日付が同じ」
+          if((numloginformhour-numhour<=3)||(numloginformhour-numhour==0)){
+            this.errorFind.dateError="今から3時間後の日時をご入力ください"
+            console.log("3時間以内です")//条件2「値が3未満」
+          }
+        }else{
+          this.errorFind.dateError=""
+        }
+
+
         //条件
         // ①配達日時と今日の日にちが一致しているか
         // ②①が一致していた場合、希望時間ーその注文している時の時間（現在時間）＝３未満だったらエラー発動
