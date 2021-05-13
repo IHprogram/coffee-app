@@ -5,6 +5,7 @@ import ItemDetail from "../views/ItemDetail.vue";
 import Cart from "../views/Cart.vue"
 import OrderFinished from "../views/OrderFinished.vue"
 import OrderComfirm from "../views/OrderComfirm.vue"
+import OrderLog from "../views/OrderLog.vue"
 
 
 Vue.use(VueRouter);
@@ -38,6 +39,11 @@ const routes = [
     name: "OrderComfirm",
     component: OrderComfirm,
   },
+  {
+    path: "orderlog",
+    name: "OrderLog",
+    component: OrderLog
+  }
 ];
 
 const router = new VueRouter({

@@ -152,11 +152,7 @@ export default new Vuex.Store({
     addOrder2(state, order){
       state.orders.push(order);
     },
-    // deleteOrders(state,{id}){
-    //   const index =state.orders.findIndex(order=>order.id===id)
-    //   state.orders.splice(index,1)
-    // }
-  },
+    },
   actions: {
     setLoginUser({ commit }, user) {
       commit("setLoginUser", user);
@@ -171,7 +167,7 @@ export default new Vuex.Store({
     deleteLoginUser({ commit }) {
       commit("deleteLoginUser");
     },
-    addOrder({ getters, commit }, order) {
+   addOrder({ getters, commit }, order) {
       if (getters.uid) {
           order.userId = getters.uid;
           firebase
@@ -190,13 +186,6 @@ export default new Vuex.Store({
           snapshot.forEach(doc=>commit('addOrder',{id: doc.id,order: doc.data()}))
       })
     },
-    //deleteOrders({getters,commit},{id}){
-    //   if(getters.uid){
-    //     firebase.firestore().collection(`users/${getters.uid}/order`).doc(id).delete().then(()=>{
-    //       commit('deleteOrders',{id})
-    //     })
-    //   }
-    // }
   },
   getters: {
     userName: state => state.login_user ? state.login_user.displayName : '',
