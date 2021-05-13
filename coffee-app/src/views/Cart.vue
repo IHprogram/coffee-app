@@ -21,7 +21,7 @@
               </tr>
               <tr
                 v-for="(order, index) in orders"
-                :key="order.id"
+                :key="index"
                 class="text-center"
               >
                 <td>
@@ -53,10 +53,10 @@
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class="row" >
         <div class="col-xs-offset-5 col-xs-3">
           <div class="form-group">
-            <div class="form-group text-center" v-if="orders.length != 0">
+            <div class="form-group text-center" v-if="orders.length != 0" @click="LoginComfirm">
               <router-link :to="{name:'OrderComfirm'}">
               <form action="order_confirm.html">
                 <input
@@ -78,33 +78,32 @@
   </div>
 </template>
 <script>
-export default{
-  name:"Cart",
-    data(){
-    return{
-   orders: this.$store.state.orders,
-// totalPrice: 0,
-// taxInclutedPrice: 0,
-// taxOnlyPrice: 0
+import {mapActions} from "vuex"
+import {mapGetters} from "vuex"
+
+export default {
+  name: "Cart",
+  data() {
+    return {
+      // orders: this.$store.state.orders,
     };
- },
-//  mounted(){
-// for(let i = 0; i<this.orders.length;i++){
-// this.totalPrice += this.orders[i].price
-// }
-// this.taxOnlyPrice = Math.round(this.totalPrice*0.1)
-// this.taxInclutedPrice=Math.round(this.totalPrice*1.1)
-//  },
-// computed:{
-//     order(){
-// 		return this.$store.state.orders
-// 	}
-// 	}
-  methods:{
-    deleteOrder(index){
-      if(confirm("カートから削除しますか？"))
-      this.orders.splice(index, 1)
+  },
+  methods: {
+    deleteOrder(index) {
+      if (confirm("カートから削除しますか？"))
+        this.$store.state.orders.splice(index, 1);
+      console.log("deleteOrderです");
+        //   this.deleteOrders({id});
     },
+    LoginComfirm(){
+        if(!this.$store.getters.uid){
+            this.login()
+        }else{
+            console.log("ログイン済");
+        }
+    },
+...mapGetters(["uid"]),
+...mapActions(["login",'deleteOrders']),
   },
   computed: {
     totalPrice() {
@@ -114,6 +113,9 @@ export default{
     taxPrice() {
       const tax = this.totalPrice * 0.1;
       return Math.round(tax);
+    },
+    orders() {
+      return this.$store.getters.order;
     },
   },
 };

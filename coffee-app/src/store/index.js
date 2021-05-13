@@ -148,7 +148,14 @@ export default new Vuex.Store({
     addOrder(state,{id, order}){
       order.id = id;
       state.orders.push(order);
-    }
+    },
+    addOrder2(state, order){
+      state.orders.push(order);
+    },
+    // deleteOrders(state,{id}){
+    //   const index =state.orders.findIndex(order=>order.id===id)
+    //   state.orders.splice(index,1)
+    // }
   },
   actions: {
     setLoginUser({ commit }, user) {
@@ -175,13 +182,35 @@ export default new Vuex.Store({
               commit("addOrder", { id: doc.id, order });
             });
       }else{
-        commit("addOrder", { order });
+        commit("addOrder2", order );
       }
-    }
+    },
+    fetchOrders({getters,commit}){
+      firebase.firestore().collection(`users/${getters.uid}/order`).get().then(snapshot=> {
+          snapshot.forEach(doc=>commit('addOrder',{id: doc.id,order: doc.data()}))
+      })
+    },
+    //deleteOrders({getters,commit},{id}){
+    //   if(getters.uid){
+    //     firebase.firestore().collection(`users/${getters.uid}/order`).doc(id).delete().then(()=>{
+    //       commit('deleteOrders',{id})
+    //     })
+    //   }
+    // }
   },
   getters: {
     userName: state => state.login_user ? state.login_user.displayName : '',
     getItemById: (state) => (id) => state.items.find((item) => item.id === id),
     uid: (state) => (state.login_user ? state.login_user.uid : null),
+    
+    order: state => {return state.orders.map(order => { //orderの中身はorders配列の要素一つ一つ
+      let orderItem = state.items.find(item => item.id === order.itemId)
+      return {
+        id: orderItem.id,
+        name: orderItem.name,
+        price: orderItem.price,
+      }
+    }
+    )}
   },
 });

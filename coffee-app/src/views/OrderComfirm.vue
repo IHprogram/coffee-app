@@ -16,8 +16,8 @@
                 </th>
               </tr>
               <tr
-                v-for="order in orders"
-                :key="order.id"
+                v-for="(order,index) in orders"
+                :key="index"
                 class="text-center"
               >
                 <td>
@@ -31,13 +31,10 @@
                 </td>
                 <td>{{ order.price }}円</td>
               </tr>
-              <tr v-if="orders.length === 0">
-                <td class="text-center">カートに商品がありません</td>
-              </tr>
             </tbody>
           </table>
           </div>
-                <div class="row">
+     <div class="row">
         <div class="col-xs-offset-2 col-xs-8">
           <div class="form-group text-center" v-if="orders.length != 0">
             <span id="total-price"
@@ -47,7 +44,6 @@
           </div>
         </div>
       </div>
-<div>
   <!-- <router-link :to="{name:'Home'}"> -->
     <div class="row">
         <div class="col-xs-offset-5 col-xs-2">
@@ -57,11 +53,24 @@
                     <input class="form-control btn btn-warning btn-block" type="submit" value="お届け先情報と支払方法を入力する">
                 </form> -->
             </div>
+                   <router-link :to="{name:'Home'}">
+		<div class="row">
+			<div class="col-xs-offset-5 col-xs-2">
+				<div class="form-group">
+					<form>
+						<input class="form-control btn btn-warning btn-block"
+							type="submit" value="トップ画面を表示する">
+					</form>
+				</div>
+			</div>
+		</div>
+        </router-link>
+        
         </div>
     </div>
 <!-- </router-link> -->
 </div>
-</div>
+
 
 
 
@@ -78,7 +87,7 @@ export default{
     name:"OrderComfirm",
     data(){
         return{
-   orders: this.$store.state.orders,
+   //orders: this.$store.state.orders,
     }
 },
 methods:{
@@ -100,6 +109,9 @@ methods:{
     taxPrice() {
       const tax = this.totalPrice * 0.1;
       return Math.round(tax);
+    },
+        orders() {
+      return this.$store.getters.order;
     },
   }
 }
