@@ -10,11 +10,11 @@
           </ul>
         </div> -->
         <div><label for="name">名前：
-          <input type="text" name="name" id="name" v-model="loginForm.name">{{ellorFind.nameError}}</label></div>
+          <input type="text" name="name" id="name" v-model="loginForm.name">{{errorFind.nameError}}</label></div>
         <div><label for="mail">メールアドレス:
-          <input type="email" name="email" id="email" v-model="loginForm.email">{{ellorFind.emailError}}</label></div>
+          <input type="email" name="email" id="email" v-model="loginForm.email">{{errorFind.emailError}}</label></div>
         <div><label for="postalcode">郵便番号:
-          <input type="text" name="postalcode" id="postalcode" v-model="postalcode">{{ellorFind.postalcodeError}}</label></div>
+          <input type="text" name="postalcode" id="postalcode" v-model="loginForm.postalcode">{{errorFind.postalcodeError}}</label></div>
         <div><label for="address">住所:
           <input type="text" name="address" id="address" v-model="loginForm.address">{{errorFind.addressError}}</label></div>
         <div><label for="tel">電話番号:
@@ -28,7 +28,7 @@
           </select>
         </p>
         <input type="submit" @click="btnClick" class="btn btn-info" value="この内容で注文する">
-        </div>
+  </div>
 </template>
 
 <script>
@@ -37,30 +37,28 @@ export default ({
  data(){
    return {
     // errors:[],
-  loginForm:{
-    name: null,
-    email:null,
-    postalcode: null,
-    address: null,
-    tel: null,
-    date: null,
-    pay: null,
-  },
-  ellorFind:{
-    nameError:"",
-    emailError:"",
-    postalcodeError:"",
-    addressError:"",
-    telError:"",
-    dateError:"",
-    payError:"",
-
-  }
+    // messages:'',
+    loginForm: {
+      name: "",
+      email:"",
+      postalcode: "",
+      address: "",
+      tel: "",
+      date: "",
+      // pay: "",
+    },
+    errorFind: {
+      nameError: "",
+      emailError:"",
+      postalcodeError:"",
+      addressError:"",
+      telError:"",
+      dateError:"",
+    }
    }
  },
   methods: {
     btnClick() {
-
       if(!this.loginForm.name){
         this.errorFind.nameError = "名前を変更してください"
       } else if (this.loginForm.name){
@@ -132,7 +130,6 @@ export default ({
       // } else {
       //   this.loginForm.dateError = ""
       // }
-
     }
   },
 })
