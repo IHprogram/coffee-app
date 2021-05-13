@@ -43,7 +43,6 @@
           </table>
         </div>
       </div>
-
       <div class="row">
         <div class="col-xs-offset-2 col-xs-8">
           <div class="form-group text-center" v-if="orders.length != 0">
@@ -54,11 +53,11 @@
           </div>
         </div>
       </div>
-
-      <div class="row">
+      <div class="row" >
         <div class="col-xs-offset-5 col-xs-3">
           <div class="form-group">
-            <div class="form-group text-center" v-if="orders.length != 0">
+            <div class="form-group text-center" v-if="orders.length != 0" @click="LoginComfirm">
+              <router-link :to="{name:'OrderComfirm'}">
               <form action="order_confirm.html">
                 <input
                   class="form-control btn btn-warning btn-block mt-4"
@@ -66,10 +65,10 @@
                   value="注文に進む"
                 />
               </form>
+              </router-link>
             </div>
             <p class="text-center mt-4">
-              <router-link :to="{ name: 'Home' }"
-                >トップページに戻る</router-link
+              <router-link :to="{ name: 'Home' }">トップページに戻る</router-link
               >
             </p>
           </div>
@@ -78,8 +77,10 @@
     </div>
   </div>
 </template>
-
 <script>
+import {mapActions} from "vuex"
+import {mapGetters} from "vuex"
+
 export default {
   name: "Cart",
   data() {
@@ -92,6 +93,15 @@ export default {
       this.$store.state.orders.splice(index, 1);
       console.log("deleteOrderです");
     },
+    LoginComfirm(){
+        if(!this.$store.getters.uid){
+            this.login()
+        }else{
+            console.log("ログイン済");
+        }
+    },
+...mapGetters(["uid"]),
+...mapActions(["login",'deleteOrders']),
   },
   computed: {
     totalPrice() {

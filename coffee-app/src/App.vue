@@ -13,17 +13,30 @@ import { mapActions } from 'vuex'
 export default ({
   components: {
   },
-  created(){
-    firebase.auth().onAuthStateChanged(user => {
+  beforeCreate(){
+  firebase.auth().onAuthStateChanged(user => {
       if(user){
         this.setLoginUser(user)
+        this.fetchOrders();
       } else {
         this.deleteLoginUser()
+        this.$store.state.orders=[]
       }
     })
+  },
+  created(){
+    // firebase.auth().onAuthStateChanged(user => {
+    //   if(user){
+    //     this.setLoginUser(user)
+    //     this.fetchOrders();
+    //   } else {
+    //     this.deleteLoginUser()
+    //     this.$store.state.orders=[]
+    //   }
+    // })
  },
   methods: {
-    ...mapActions(['setLoginUser','deleteLoginUser'])
+    ...mapActions(['setLoginUser','deleteLoginUser','fetchOrders'])
   }
 })
 </script>

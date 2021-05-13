@@ -148,8 +148,11 @@ export default new Vuex.Store({
     addOrder(state,{id, order}){
       order.id = id;
       state.orders.push(order);
-    }
-  },
+    },
+    addOrder2(state, order){
+      state.orders.push(order);
+    },
+    },
   actions: {
     setLoginUser({ commit }, user) {
       commit("setLoginUser", user);
@@ -177,7 +180,12 @@ export default new Vuex.Store({
       }else{
         commit("addOrder2", order );
       }
-    }
+    },
+    fetchOrders({getters,commit}){
+      firebase.firestore().collection(`users/${getters.uid}/order`).get().then(snapshot=> {
+          snapshot.forEach(doc=>commit('addOrder',{id: doc.id,order: doc.data()}))
+      })
+    },
   },
   getters: {
     userName: state => state.login_user ? state.login_user.displayName : '',
