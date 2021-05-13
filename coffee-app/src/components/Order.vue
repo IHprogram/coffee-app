@@ -28,9 +28,9 @@
           <input type="datetime-local" name="date" id="date" v-model="loginForm.date">{{errorFind.dateError}}</label>
         </div>
         <p>支払い方法：
-          <select name="payment" id="pay" value="支払い方法">
-            <option value="0:未入金" id="1">代金引換</option>
-            <option value="1:入金済" id="2">クレジットカード決済</option>
+          <select name="payment" id="pay" value="支払い方法" v-model="loginForm.pay">
+            <option value=0 id="1">代金引換</option>
+            <option value=1 id="2">クレジットカード決済</option>
           </select>
         </p>
         <input type="submit" @click="btnClick" class="btn btn-info" value="この内容で注文する">
@@ -50,7 +50,7 @@ export default ({
       address: "",
       tel: "",
       date: "",
-      // pay: "",
+      pay: "",
     },
     errorFind: {
       nameError: "",
@@ -63,7 +63,7 @@ export default ({
    }
  },
   methods: {
-    ...mapActions["addComfirmOrder"],
+    ...mapActions(["updateOrder"]),
     
     btnClick() {
       if(!this.loginForm.name){
@@ -90,7 +90,7 @@ export default ({
       }
 
        if(!this.loginForm.address){
-        this.errorFind.addressError = "住所を変更してください"
+         this.errorFind.addressError = "住所を変更してください"
       } else if (this.loginForm.address){
         this.errorFind.addressError = ""
       }
@@ -104,7 +104,7 @@ export default ({
       }
 
       //配達日時の指定
-      const validation = () => {
+  
         const today = new Date();
         const year = today.getFullYear()
         const month = "0" + (1 + today.getMonth())
@@ -144,13 +144,25 @@ export default ({
         }else{
           this.errorFind.dateError=""
         }
-      }
+
       if((this.errorFind.nameError === '') && (this.errorFind.emailError === '') && (this.errorFind.postalcodeError === '') && (this.errorFind.addressError === '') && (this.errorFind.telError === '') && (this.errorFind.dateError === '')){
+ 
+        this.$store.state.orders.forEach(order =>{
+        
+        order.orderName = this.loginForm.name
+        order.orderZipcode = this.loginForm.postalcode
+        order.orderEmail = this.loginForm.email
+        order.orderTel = this.loginForm.tel
+        order.orderTime = this.loginForm.date
+        order.orderAddress = this.loginForm.address
+        order.orderPay = Number(this.loginForm.pay)
+        console.log(typeof order.orderPay)
+        this.updateOrder({id: order.id, order2: order})
+        console.log("updateOrder呼び出し")
+        })
         this.$router.push({name: 'OrderFinished'}, () =>{})
         console.log("注文完了画面に遷移")
-        
       }else{
-        validation()
         this.$router.push({name: 'OrderComfirm'}, () =>{})
         console.log("注文ページにとどまる")
       }

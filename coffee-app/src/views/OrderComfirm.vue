@@ -76,8 +76,8 @@ export default{
     },
     name:"OrderComfirm",
     data(){
-        return{
-   //orders: this.$store.state.orders,
+      return{
+        obj : {}
     }
 },
 methods:{
