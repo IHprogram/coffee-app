@@ -104,26 +104,56 @@ export default ({
       }
 
       //配達日時の指定
-
+      const validation = () => {
         const today = new Date();
         const year = today.getFullYear()
         const month = "0" + (1 + today.getMonth())
         const day = today.getDate()
         const hour = today.getHours()
-        const minutes = today.getMinutes()
 
-          let orderDay = 'YYYY-MM-DD'+'T'+'hh:mm'        //現在日時
-          orderDay = orderDay.replace(/YYYY/g, year);
-          orderDay = orderDay.replace(/MM/g, month);
-          orderDay = orderDay.replace(/DD/g, day);
-          orderDay = orderDay.replace(/hh/g, hour);
-          orderDay = orderDay.replace(/mm/g, minutes);
+        const loginFormDate = this.loginForm.date;
+        console.log("配達日全部"+loginFormDate)
 
-        console.log(this.loginForm.date)
-        console.log(orderDay);
+       const loginformyear = loginFormDate.slice(0,4)
+       console.log("今年は"+year);//2021
+        console.log("配達年は"+loginformyear);//2021
 
+        const loginformmonth = loginFormDate.slice(5,7)
+        console.log("今月は"+month);//05
+        console.log("配達月は"+loginformmonth);//05
+
+        const loginformday = loginFormDate.slice(8,10)
+        console.log("今年は"+day);//13
+        console.log("配達日は"+loginformday);//13
+
+        const loginformhour = loginFormDate.slice(11,13)
+        console.log("現在時間は"+hour);
+        console.log("配達時間は"+loginformhour);
+
+        const numloginformhour=Number(loginformhour);//文字列から数値に変換
+        console.log(numloginformhour)
+        const numhour = Number(hour);//文字列から数値に変換
+        console.log(numloginformhour-numhour)
+
+        if(day==loginformday){
+          console.log("同じ日です");//条件1「今日と配達日の日付が同じ」
+          if((numloginformhour-numhour<=3)||(numloginformhour-numhour==0)){
+            this.errorFind.dateError="今から3時間後の日時をご入力ください"
+            console.log("3時間以内です")//条件2「値が3未満」
+          }
+        }else{
+          this.errorFind.dateError=""
+        }
+      }
+      if((this.errorFind.nameError === '') && (this.errorFind.emailError === '') && (this.errorFind.postalcodeError === '') && (this.errorFind.addressError === '') && (this.errorFind.telError === '') && (this.errorFind.dateError === '')){
+        this.$router.push({name: 'OrderFinished'}, () =>{})
+        console.log("注文完了画面に遷移")
         
-
+      }else{
+        validation()
+        this.$router.push({name: 'OrderComfirm'}, () =>{})
+        console.log("注文ページにとどまる")
+      }
     }
   },
 })
