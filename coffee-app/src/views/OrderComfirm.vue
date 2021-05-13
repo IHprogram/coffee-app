@@ -52,6 +52,7 @@
                <!-- <form>
                     <input class="form-control btn btn-warning btn-block" type="submit" value="お届け先情報と支払方法を入力する">
                 </form> -->
+                <Order/>
             </div>
                    <router-link :to="{name:'Home'}">
 		<div class="row">
@@ -65,9 +66,9 @@
 			</div>
 		</div>
         </router-link>
-        
         </div>
     </div>
+    
 <!-- </router-link> -->
 </div>
 
@@ -82,8 +83,12 @@
 <script>
 import {mapActions} from "vuex"
 import {mapGetters} from "vuex"
+import Order from "../components/Order.vue"
 
 export default{
+    components: {
+      Order
+    },
     name:"OrderComfirm",
     data(){
         return{
