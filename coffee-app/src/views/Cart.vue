@@ -94,14 +94,19 @@ export default {
   methods: {
     deleteOrder(order) {
       if (confirm("カートから削除しますか？")) {
-        console.log(order);
-        let orderItem = this.$store.state.orders.find(
-          (element) => element.itemId === order.id
-        );
-        console.log(orderItem);
-        let orderItemId = orderItem.id;
-        console.log(orderItemId);
-        this.deleteItem({ orderItemId });
+        if (this.$store.state.login_user != null) {
+          console.log(order);
+          let orderItem = this.$store.state.orders.find(
+            (element) => element.itemId === order.id
+          );
+          console.log(orderItem);
+          let orderItemId = orderItem.id;
+          console.log(orderItemId);
+          this.deleteItem({ orderItemId });
+        } else {
+          console.log("私です");
+          this.logoutDeleteItem(order);
+        }
       }
       console.log("deleteOrderです");
     },
@@ -113,7 +118,7 @@ export default {
       }
     },
     ...mapGetters(["uid"]),
-    ...mapActions(["login", "deleteItem"]),
+    ...mapActions(["login", "deleteItem", "logoutDeleteItem"]),
   },
   computed: {
     totalPrice() {

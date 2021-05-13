@@ -153,14 +153,12 @@ export default new Vuex.Store({
       state.orders.push(order);
     },
     deleteItem(state, {orderItemId }){
-      // console.log('ミューテーションです');
-      // console.log(orderItemId );
-
       let order1 = state.orders.findIndex(order => order.id === orderItemId);
-      // console.log(order1);
-
       state.orders.splice(order1, 1);
-      // console.log(state.orders)
+    },
+    logoutDeleteItem(state, order){
+      let order1 = state.orders.findIndex(element => element.itemId === order.id);
+      state.orders.splice(order1, 1);
     }
     },
   actions: {
@@ -205,6 +203,11 @@ export default new Vuex.Store({
         })
       }
     },
+    logoutDeleteItem({commit}, order){
+      console.log('僕です');
+      console.log(order);
+      commit('logoutDeleteItem', order);
+    }
   },
   getters: {
     userName: state => state.login_user ? state.login_user.displayName : '',
