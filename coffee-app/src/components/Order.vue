@@ -3,29 +3,55 @@
     <h3 class="text-center">注文画面</h3>
       <h4 class="text-center">お届け先情報</h4>
       <hr>
+      <div class="text-center mt-4">
         <div>
           <label for="name">名前：
-          <input type="text" name="name" id="name" v-model="loginForm.name">{{errorFind.nameError}}</label>
+          <input type="text" name="name" id="name" v-model="loginForm.name">
+          <div style="color: red;">
+            {{errorFind.nameError}}
+          </div>
+          </label>
         </div>
         <div>
           <label for="mail">メールアドレス:
-          <input type="email" name="email" id="email" v-model="loginForm.email">{{errorFind.emailError}}</label>
+          <input type="email" name="email" id="email" v-model="loginForm.email">
+          <div style="color: red;">
+            {{errorFind.emailError}}
+          </div>
+          </label>
         </div>
         <div>
           <label for="postalcode">郵便番号:
-          <input type="text" name="postalcode" id="postalcode" v-model="loginForm.postalcode">{{errorFind.postalcodeError}}</label>
+          <input type="text" name="postalcode" id="postalcode" v-model="loginForm.postalcode">
+          <div style="color: red;">
+          {{errorFind.postalcodeError}}
+          </div>
+          </label>
         </div>
+
         <div>
           <label for="address">住所:
-          <input type="text" name="address" id="address" v-model="loginForm.address">{{errorFind.addressError}}</label>
+          <input type="text" name="address" id="address" v-model="loginForm.address">
+          <div style="color: red;">
+          {{errorFind.addressError}}
+          </div>
+          </label>
         </div>
         <div>
           <label for="tel">電話番号:
-          <input type="tel" name="tel" id="tel" v-model="loginForm.tel">{{errorFind.telError}}</label>
+          <input type="tel" name="tel" id="tel" v-model="loginForm.tel">
+          <div style="color: red;">
+            {{errorFind.telError}}
+          </div>
+          </label>
         </div>
         <div>
           <label for="date">配達日時:
-          <input type="datetime-local" name="date" id="date" v-model="loginForm.date">{{errorFind.dateError}}</label>
+          <input type="datetime-local" name="date" id="date" v-model="loginForm.date">
+          <div style="color: red;">
+            {{errorFind.dateError}}
+          </div>
+          </label>
         </div>
         <p>支払い方法：
           <select name="payment" id="pay" value="支払い方法" v-model="loginForm.pay">
@@ -33,9 +59,11 @@
             <option value=1 id="2">クレジットカード決済</option>
           </select>
         </p>
-        <input type="submit" @click="btnClick" class="btn btn-info" value="この内容で注文する">
+        <input type="submit" @click="btnClick" class="btn btn-info mb-4" value="この内容で注文する">
+    </div>
   </div>
 </template>
+
 
 <script>
 import { mapActions } from "vuex";
@@ -84,6 +112,7 @@ export default ({
       if(!this.loginForm.postalcode) {
         this.errorFind.postalcodeError = "郵便番号を入力して下さい"
       } else if (this.loginForm.postalcode.match(/^[0-9]{3}-[0-9]{4}$/)){
+        // .match正規表現に関するマッチング
         this.errorFind.postalcodeError = ""
       } else {
         this.errorFind.postalcodeError = "郵便番号はXXX-XXXXの形式で入力してください"
@@ -134,39 +163,42 @@ export default ({
         console.log(numloginformhour)
         const numhour = Number(hour);//文字列から数値に変換
         console.log(numloginformhour-numhour)
-
-        if(day==loginformday){
-          console.log("同じ日です");//条件1「今日と配達日の日付が同じ」
-          if((numloginformhour-numhour<=3)||(numloginformhour-numhour==0)){
+          if(!this.loginForm.date) {
+          this.errorFind.dateError = "配達日時を入力して下さい"
+          }
+           else if(day==loginformday){
+            console.log("同じ日です");
+            if((numloginformhour-numhour<=3)||(numloginformhour-numhour==0)){
             this.errorFind.dateError="今から3時間後の日時をご入力ください"
             console.log("3時間以内です")//条件2「値が3未満」
           }
-        }else{
+          
+          }else{
           this.errorFind.dateError=""
         }
-
       if((this.errorFind.nameError === '') && (this.errorFind.emailError === '') && (this.errorFind.postalcodeError === '') && (this.errorFind.addressError === '') && (this.errorFind.telError === '') && (this.errorFind.dateError === '')){
- 
+        // すべての入力項目を満たし、バリデーションが作動しなかった場合
         this.$store.state.orders.forEach(order =>{
-        
-        order.orderName = this.loginForm.name
-        order.orderZipcode = this.loginForm.postalcode
-        order.orderEmail = this.loginForm.email
-        order.orderTel = this.loginForm.tel
-        order.orderTime = this.loginForm.date
-        order.orderAddress = this.loginForm.address
-        order.orderPay = Number(this.loginForm.pay)
-        console.log(typeof order.orderPay)
-        this.updateOrder({id: order.id, order2: order})
-        console.log("updateOrder呼び出し")
-        })
-        this.$router.push({name: 'OrderFinished'}, () =>{})
-        console.log("注文完了画面に遷移")
-      }else{
-        this.$router.push({name: 'OrderComfirm'}, () =>{})
-        console.log("注文ページにとどまる")
+          order.orderName = this.loginForm.name
+          order.orderZipcode = this.loginForm.postalcode
+          order.orderEmail = this.loginForm.email
+          order.orderTel = this.loginForm.tel
+          order.orderTime = this.loginForm.date
+          order.orderAddress = this.loginForm.address
+          order.orderPay = Number(this.loginForm.pay)
+          console.log(typeof order.orderPay)
+          this.updateOrder({id: order.id, order2: order})
+          console.log("updateOrder呼び出し")
+          console.log(order.id)
+          console.log(order)
+          })
+          this.$router.push({name: 'OrderFinished'}, () =>{})
+          console.log("注文完了画面に遷移")
+        }else{
+          this.$router.push({name: 'OrderComfirm'}, () =>{})
+          console.log("注文ページにとどまる")
+        }
       }
-    }
-  },
-})
-</script>
+    },
+  })
+  </script>

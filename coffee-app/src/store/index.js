@@ -148,6 +148,8 @@ export default new Vuex.Store({
     },
     addOrder(state,{id, order}){
       order.id = id;
+      console.log("オーダーIDの確認")
+      console.log(order.id)
       state.orders.push(order);
       console.log("オーダー内容確認")
       console.log(order)
@@ -218,6 +220,9 @@ export default new Vuex.Store({
             .collection(`users/${getters.uid}/order`)
             .add(order)
             .then((doc) => {
+              console.log("アクション時のオーダーID")
+              console.log(doc.id)
+              console.log(order)
               commit("addOrder", { id: doc.id, order });
             });
       }else{
@@ -287,6 +292,7 @@ export default new Vuex.Store({
         id: orderItem.id,
         name: orderItem.name,
         price: orderItem.price,
+        imagePath: orderItem.imagePath
       }
       return array;
     }

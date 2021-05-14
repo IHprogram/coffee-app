@@ -22,7 +22,7 @@
             <th v-for="searchitem in searchitems" :key=searchitem.id>
                <router-link :to="{name: 'item_detail', params:{item_id: searchitem.id}}">
                 <td>{{searchitem.name}}</td> 
-                <!-- <td>{{searchitem.description}}</td> -->
+                <td>{{searchitem.description}}</td>
                 <td>{{searchitem.price}}円</td>
                 <td><img :src="searchitem.imagePath"></td>
                </router-link>
@@ -35,10 +35,9 @@
       </table>
     </div>
   </div>
-</div>
+</div> 
 </template>
         
-
 <script>
 export default {
   data() {

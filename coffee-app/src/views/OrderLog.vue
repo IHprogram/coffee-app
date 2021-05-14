@@ -15,6 +15,9 @@
                 <th>
                   <div class="text-center">価格(税込)</div>
                 </th>
+                <th>
+                  <div class="text-center">-</div>
+                </th>
               </tr>
               <tr
                 v-for="(order, index) in orders"
@@ -31,6 +34,7 @@
                   </router-link>
                 </td>
                 <td>{{ order.price }}円</td>
+                <td ><img :src="order.imagePath" style="width: 100px; height:100px"></td>
               </tr>
             </tbody>
           </table>

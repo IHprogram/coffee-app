@@ -16,6 +16,9 @@
                   <div class="text-center">価格(税込)</div>
                 </th>
                 <th>
+                  <div class="text-center">商品イメージ</div>
+                </th>
+                <th>
                   <div class="text-center">ー</div>
                 </th>
               </tr>
@@ -34,6 +37,7 @@
                   >
                 </td>
                 <td>{{ order.price }}円</td>
+                <td><img :src="order.imagePath" style="width: 100px; height: 100px;"></td>
                 <td><button @click="deleteOrder(order)">削除</button></td>
               </tr>
               <tr v-if="orders.length === 0">
@@ -101,6 +105,7 @@ export default {
           );
           console.log(orderItem);
           let orderItemId = orderItem.id;
+          console.log(orderItemId)
           console.log(orderItemId);
           this.deleteItem({ orderItemId });
         } else {

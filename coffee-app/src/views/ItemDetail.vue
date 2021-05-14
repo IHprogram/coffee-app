@@ -29,8 +29,12 @@
     <p>合計:{{ total_price }}円（税込み）</p>
 
     <button type="button" @click="myClick">カートに入れる</button>
+    <div>
+      <router-link :to="{ name: 'Home' }">トップページに戻る</router-link>
+    </div>
   </div>
 </template>
+    
 
 <script>
 import { mapActions } from "vuex";
